@@ -1,0 +1,13 @@
+overwrite: true
+schema: 'src/schema/**/*.ts'
+generates:
+  src/generated/types.ts:
+    config:
+      contextType: ../config/context#Context
+      enumValues:
+        Role: ../ts/enums#Role
+        StoreStatus: ../ts/enums#StoreStatus
+        Sort: ../ts/enums#Sort
+    plugins:
+      - 'typescript'
+      - 'typescript-resolvers'
