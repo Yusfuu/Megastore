@@ -54,7 +54,7 @@ exports.typeDefs = (0, apollo_server_express_1.gql) `
   type Store {
     id: ID!
     name: String!
-    thumbnail: String!
+    thumbnail: [Media]!
     products: [Product]!
     owner: User!
     status: StoreStatus!
@@ -67,7 +67,11 @@ exports.typeDefs = (0, apollo_server_express_1.gql) `
   }
 
   type Mutation {
-    createStore(name: String!, thumbnail: String!): Store!
+    createStore(
+      name: String!
+      thumbnail: [Upload]!
+      document_verification: Upload
+    ): Store!
     deleteStore(id: ID!): Store
   }
 `;

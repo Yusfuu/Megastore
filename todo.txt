@@ -1,8 +1,0 @@
-super admin disable compte
-super admin confirm seller
-
-
-admin confirm client command
-admin contacte users
-
-

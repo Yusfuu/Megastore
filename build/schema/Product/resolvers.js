@@ -46,6 +46,10 @@ exports.resolvers = {
             const store = await dataloader.store.load(id);
             return store;
         },
+        thumbnails: async ({ thumbnails: ids }, args, { dataloader }) => {
+            const images = await dataloader.media.loadMany(ids);
+            return images;
+        },
     },
 };
 //# sourceMappingURL=resolvers.js.map

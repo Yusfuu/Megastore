@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.resolvers = void 0;
 const upload_1 = require("../../lib/upload");
 const index_1 = require("../../models/index");
+const enums_1 = require("../../ts/enums");
 const bcrypt_1 = require("bcrypt");
 exports.resolvers = {
     Query: {
@@ -33,6 +34,7 @@ exports.resolvers = {
             const user = await index_1.User.findByIdAndUpdate(id, {
                 $set: {
                     isSeller: true,
+                    typeAccount: enums_1.TypeAccount.STARTER,
                 },
             }, { new: true });
             return user;
@@ -44,6 +46,18 @@ exports.resolvers = {
                 },
             }, { new: true });
             return user;
+        },
+        createAdmin: async (_, { input }) => {
+            const { name, email, password } = input;
+            // hash password
+            const passwordHash = await (0, bcrypt_1.hash)(password, 10);
+            // save user in database
+            const admin = await index_1.Admin.create({
+                name,
+                email,
+                password: passwordHash,
+            });
+            return admin;
         },
     },
 };

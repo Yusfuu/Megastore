@@ -26,5 +26,6 @@ exports.dataloader = {
     category: (0, exports.createLoader)(index_1.Category),
     product: (0, exports.createLoader)(index_1.Product),
     user: (0, exports.createLoader)(index_1.User),
+    media: (0, exports.createLoader)(index_1.Media),
 };
 //# sourceMappingURL=loader.js.map

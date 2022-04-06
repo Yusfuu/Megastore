@@ -12,6 +12,7 @@ export interface IStore {
   owner: IUser;
   status: StoreStatus;
   document_verification: IMedia;
+  limit_product: number;
 }
 
 export interface PaginatedStore {

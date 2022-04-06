@@ -6,6 +6,12 @@ const index_1 = require("../../models/index");
 const apollo_server_core_1 = require("apollo-server-core");
 const bcrypt_1 = require("bcrypt");
 exports.resolvers = {
+    User: {
+        Store: async ({ Store: id }, _, { dataloader }) => {
+            const store = await dataloader.store.load(id);
+            return store;
+        },
+    },
     Mutation: {
         register: async (_, { input }) => {
             const { email, firstName, lastName } = input;
@@ -38,7 +44,7 @@ exports.resolvers = {
         },
         login: async (_, { email, password }) => {
             // find user by email
-            const user = await index_1.User.findOne({ where: { email } });
+            const user = await index_1.User.findOne({ email });
             // check if user exists
             if (!user) {
                 throw new apollo_server_core_1.AuthenticationError('Sorry, we could not find your account.');

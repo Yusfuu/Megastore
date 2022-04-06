@@ -4,7 +4,6 @@ const permission_1 = require("../../middlewares/permission");
 const permission = {
     Query: {},
     Mutation: {
-        updateRole: permission_1.isAuthenticated,
         updatePassword: permission_1.isAuthenticated,
     },
 };
