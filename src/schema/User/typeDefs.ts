@@ -40,7 +40,6 @@ export const typeDefs = gql`
   type Mutation {
     register(input: UserInput): AuthPayload
     login(email: String!, password: String!): AuthPayload
-    updateRole(status: Role!): AuthResult
     updatePassword(oldPassword: String!, newPassword: String!): User
   }
 `;

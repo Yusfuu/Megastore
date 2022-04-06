@@ -1,5 +1,5 @@
 import type { Resolvers } from '@generated/types';
-import { Store, IStore, IUser, IProduct } from '@models/index';
+import { Store, IStore, IUser, IProduct, User } from '@models/index';
 
 export const resolvers: Resolvers = {
   Query: {
@@ -22,6 +22,15 @@ export const resolvers: Resolvers = {
   },
   Mutation: {
     createStore: async (_, { name, thumbnail }, { user }) => {
+      // update user role if user create store
+      if (user.role === 'USER') {
+        const updatedUser: IUser | null = await User.findOneAndUpdate(
+          { _id: user.id },
+          { role: 'SELLER' },
+          { new: true }
+        );
+      }
+
       const store: IStore = await Store.create({
         name,
         thumbnail,

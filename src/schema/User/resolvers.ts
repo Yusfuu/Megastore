@@ -72,38 +72,6 @@ export const resolvers: Resolvers = {
 
       return auth;
     },
-    updateRole: async (_, { status }, { user }) => {
-      if (!['USER', 'SELLER'].includes(status)) {
-        throw new AuthenticationError(
-          'You are not allowed to change your role'
-        );
-      }
-
-      if (user.role === status) {
-        return user;
-      }
-
-      const updatedUser: IUser | null = await User.findOneAndUpdate(
-        { _id: user.id },
-        { role: status },
-        { new: true }
-      );
-
-      if (!updatedUser) {
-        throw new AuthenticationError('something went wrong');
-      }
-
-      const auth = {
-        token: generateJWT({
-          id: updatedUser.id,
-          email: updatedUser.email,
-          role: updatedUser.role,
-        }),
-        user: updatedUser,
-      };
-
-      return auth;
-    },
     updatePassword: async (_, { oldPassword, newPassword }, { user }) => {
       const currentUser = await User.findOne({ id: user.id });
 
