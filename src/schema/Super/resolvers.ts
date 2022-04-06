@@ -1,14 +1,9 @@
 import type { Resolvers } from '@generated/types';
 import { multiFileUpload } from '@lib/upload';
 import { Super, ISuper, User, IUser, Admin } from '@models/index';
+import { TypeAccount } from '@ts/enums';
+import { IFile } from '@ts/types';
 import { hash } from 'bcrypt';
-
-type IFile = {
-  mimetype: string;
-  filename: string;
-  encoding: string;
-  createReadStream: () => Promise<any>;
-};
 
 export const resolvers: Resolvers = {
   Query: {
@@ -44,6 +39,7 @@ export const resolvers: Resolvers = {
         {
           $set: {
             isSeller: true,
+            typeAccount: TypeAccount.STARTER,
           },
         },
         { new: true }
