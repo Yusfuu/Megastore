@@ -8,6 +8,12 @@ export const typeDefs = gql`
     password: String!
   }
 
+  input AdminInput {
+    name: String!
+    email: String!
+    password: String!
+  }
+
   input FileInput {
     files: [Upload!]
   }
@@ -29,5 +35,6 @@ export const typeDefs = gql`
     addImage(input: FileInput): [String!]
     confirmUserIsSeller(id: ID!): User
     updateUserAccountStatus(id: ID!, status: AccountStatus!): User
+    createAdmin(input: AdminInput): Admin!
   }
 `;

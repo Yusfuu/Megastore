@@ -1,6 +1,6 @@
 import type { Resolvers } from '@generated/types';
 import { multiFileUpload } from '@lib/upload';
-import { Super, ISuper, User, IUser } from '@models/index';
+import { Super, ISuper, User, IUser, Admin } from '@models/index';
 import { hash } from 'bcrypt';
 
 type IFile = {
@@ -61,6 +61,21 @@ export const resolvers: Resolvers = {
         { new: true }
       );
       return user;
+    },
+    createAdmin: async (_, { input }) => {
+      const { name, email, password } = input!;
+
+      // hash password
+      const passwordHash = await hash(password, 10);
+
+      // save user in database
+      const admin: ISuper = await Admin.create({
+        name,
+        email,
+        password: passwordHash,
+      });
+
+      return admin;
     },
   },
 };
