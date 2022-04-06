@@ -11,6 +11,13 @@ export const typeDefs = gql`
   #   filter: StoreFilters
   # }
 
+  type Admin {
+    id: ID!
+    name: String!
+    email: String!
+    password: String!
+  }
+
   type Mutation {
     updateStoreStatus(id: ID!, status: StoreStatus!): Store
   }
