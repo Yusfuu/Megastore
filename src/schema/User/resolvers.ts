@@ -18,7 +18,7 @@ export const resolvers: Resolvers = {
         lastName,
         email,
         password,
-      }).catch((err) => (err.code === 11000 ? null : undefined));
+      }).catch((err: any) => (err.code === 11000 ? null : undefined));
 
       if (user === undefined) {
         throw new AuthenticationError('something went wrong');
@@ -72,14 +72,12 @@ export const resolvers: Resolvers = {
 
       return auth;
     },
-
     updateRole: async (_, { status }, { user }) => {
       if (!['USER', 'SELLER'].includes(status)) {
         throw new AuthenticationError(
           'You are not allowed to change your role'
         );
       }
-      console.log('init');
 
       if (user.role === status) {
         return user;
@@ -134,8 +132,7 @@ export const resolvers: Resolvers = {
     },
   },
   AuthResult: {
-    __resolveType(obj, context, info) {
-      //@ts-ignore
+    __resolveType(obj: any) {
       return obj.token ? 'AuthPayload' : 'User';
     },
   },

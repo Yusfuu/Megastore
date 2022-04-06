@@ -1,4 +1,4 @@
-import { gql } from "apollo-server-express";
+import { gql } from 'apollo-server-express';
 
 // Construct a schema, using GraphQL schema language
 export const typeDefs = gql`
@@ -27,5 +27,7 @@ export const typeDefs = gql`
   type Mutation {
     addSuper(input: SuperInput): Super!
     addImage(input: FileInput): [String!]
+    confirmUserIsSeller(id: ID!): User
+    updateUserAccountStatus(id: ID!, status: AccountStatus!): User
   }
 `;

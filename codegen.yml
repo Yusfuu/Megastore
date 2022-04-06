@@ -8,6 +8,7 @@ generates:
         Role: ../ts/enums#Role
         StoreStatus: ../ts/enums#StoreStatus
         Sort: ../ts/enums#Sort
+        AccountStatus: ../enums#AccountStatus
     plugins:
       - 'typescript'
       - 'typescript-resolvers'

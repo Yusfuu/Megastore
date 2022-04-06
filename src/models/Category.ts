@@ -5,18 +5,15 @@ import { IProduct } from './Product';
 export interface ICategory {
   id: string;
   name: string;
-  path: string | null;
-  assets: Array<string>;
+  media: Array<string>;
   products: Array<IProduct>;
 }
 
 // 2. Create a Schema corresponding to the document interface.
 
-// Materialized Paths
 const schema = new Schema<ICategory>({
   name: { type: String, required: true },
-  path: { type: String, default: null },
-  assets: [{ type: Schema.Types.ObjectId, ref: 'Asset' }],
+  media: [{ type: Schema.Types.ObjectId, ref: 'Media' }],
   products: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
 });
 

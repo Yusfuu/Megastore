@@ -5,7 +5,6 @@ export const typeDefs = gql`
   type Category {
     id: ID!
     name: String!
-    path: String
     products: [Product]!
   }
 
@@ -14,7 +13,7 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    createCategory(name: String!, path: String): Category!
+    createCategory(name: String!): Category!
     deleteCategory(id: ID!): Category
   }
 `;

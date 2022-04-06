@@ -1,7 +1,7 @@
-import type { Resolvers } from "@generated/types";
-import { multiFileUpload } from "@lib/upload";
-import { Super, ISuper } from "@models/index";
-import { hash } from "bcrypt";
+import type { Resolvers } from '@generated/types';
+import { multiFileUpload } from '@lib/upload';
+import { Super, ISuper, User, IUser } from '@models/index';
+import { hash } from 'bcrypt';
 
 type IFile = {
   mimetype: string;
@@ -37,6 +37,30 @@ export const resolvers: Resolvers = {
       const { files } = input!;
       let images = await multiFileUpload(files as IFile[]);
       return images;
+    },
+    confirmUserIsSeller: async (_, { id }) => {
+      const user: IUser | null = await User.findByIdAndUpdate(
+        id,
+        {
+          $set: {
+            isSeller: true,
+          },
+        },
+        { new: true }
+      );
+      return user;
+    },
+    updateUserAccountStatus: async (_, { id, status }) => {
+      const user: IUser | null = await User.findByIdAndUpdate(
+        id,
+        {
+          $set: {
+            AccountStatus: status,
+          },
+        },
+        { new: true }
+      );
+      return user;
     },
   },
 };

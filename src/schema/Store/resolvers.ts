@@ -1,13 +1,9 @@
 import type { Resolvers } from '@generated/types';
-import paginate from '@lib/pagination';
 import { Store, IStore, IUser, IProduct } from '@models/index';
-import { PaginatedStore } from '@models/Store';
 
 export const resolvers: Resolvers = {
   Query: {
     stores: async (parent, args) => {
-      // const { limit, cursor } = input!;
-      // const stores: PaginatedStore = await paginate(limit, cursor, Store);
       const status = args.status;
       const sort = args.sort || 'ascending';
 

@@ -2,40 +2,15 @@ import { gql } from 'apollo-server-express';
 
 // Construct a schema, using GraphQL schema language
 export const typeDefs = gql`
-  type Dimensions {
-    color: String
-    size: String
-  }
-
-  type Variants {
-    sku: String!
-    price: Float!
-    stock: Int!
-    dimensions: [Dimensions]!
-  }
-
-  input DimensionsInput {
-    color: String
-    size: String
-  }
-
-  input VariantsInput {
-    sku: String!
-    price: Float!
-    stock: Int!
-    dimensions: [DimensionsInput]!
-  }
-
   input ProductInput {
     name: String!
     description: String!
     price: Float!
     discount: Float!
-    thumbnails: [String]!
+    thumbnails: [Upload]!
     store: ID!
     brand: ID!
     category: [ID]!
-    variants: [VariantsInput]!
   }
 
   type Product {
@@ -43,13 +18,12 @@ export const typeDefs = gql`
     name: String!
     description: String!
     price: Float!
-    thumbnails: [String]!
+    thumbnails: [Media]!
     discount: Float!
     brand: Brand
     category: [Category]!
     store: Store!
     stock: Int!
-    variants: [Variants]!
   }
 
   type Query {

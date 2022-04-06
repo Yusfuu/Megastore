@@ -2,6 +2,7 @@ import type { Resolvers } from "@generated/types";
 import paginate from "@lib/pagination";
 import { createCustomer, subscribeCustomer } from "@lib/stripe";
 import { Store, IStore } from "@models/index";
+import { stripe } from "@services/stripe.service";
 
 export interface ICustomer {
   id: string;
@@ -37,7 +38,12 @@ export interface InvoiceSettings {
 export interface Metadata {}
 
 export const resolvers: Resolvers = {
-  Query: {},
+  Query: {
+    getCustomers: async (_, {}) => {
+      const customers = (await stripe.customers.list({})).data as ICustomer[];
+      return customers;
+    },
+  },
   Mutation: {
     addCustomer: async (_, { input }) => {
       const { email, name, phone } = input!;
@@ -71,9 +77,8 @@ export const resolvers: Resolvers = {
           customerId,
           priceId,
         });
-        console.log("test : ", subscriptionDone.clientSecret);
         return subscriptionDone;
-      }else{
+      } else {
         throw new Error("Customer or price not found");
       }
     },

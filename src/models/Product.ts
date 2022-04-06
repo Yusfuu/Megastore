@@ -1,38 +1,17 @@
 import { Schema, model } from 'mongoose';
-import { IStore, ICategory, IBrand } from '@models/index';
-
+import { IStore, ICategory, IBrand, IMedia } from '@models/index';
 // 1. Create an interface representing a document in MongoDB.
-
-interface Options {
-  colors?: Array<string>;
-  sizes?: Array<string>;
-}
-
-interface Dimensions {
-  color?: string;
-  size?: string;
-}
-
-interface Variants {
-  sku: string;
-  price: number;
-  stock: number;
-  dimensions: Array<Dimensions>;
-}
-
 export interface IProduct {
   id: string;
   name: string;
-  stock: number;
-  discount: number;
-  price: number;
-  description: string;
-  thumbnails: Array<string>;
-  variants: Array<Variants>;
   store: IStore;
-  brand: IBrand;
   category: Array<ICategory>;
-  options: Options;
+  brand: IBrand;
+  price: number;
+  discount: number;
+  stock: number;
+  description: string;
+  thumbnails: IMedia[];
 }
 
 // 2. Create a Schema corresponding to the document interface.
@@ -46,26 +25,6 @@ const schema = new Schema<IProduct>({
   stock: { type: Number },
   description: { type: String, required: true },
   thumbnails: [{ type: String, required: true }],
-  options: {
-    _id: false,
-    colors: [{ type: String }],
-    sizes: [{ type: String }],
-  },
-  variants: [
-    {
-      _id: false,
-      sku: { type: String },
-      price: { type: Number },
-      stock: { type: Number },
-      dimensions: [
-        {
-          _id: false,
-          size: { type: String },
-          color: { type: String },
-        },
-      ],
-    },
-  ],
 });
 
 // 3. Create a Model.

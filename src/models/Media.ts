@@ -2,6 +2,7 @@ import { Schema, model } from 'mongoose';
 
 // 1. Create an interface representing a document in MongoDB.
 export interface IMedia {
+  id: string;
   src: string;
   alt: string;
   type: string;

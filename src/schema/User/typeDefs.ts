@@ -15,12 +15,19 @@ export const typeDefs = gql`
     ADMIN
   }
 
+  enum AccountStatus {
+    ACTIVE
+    INACTIVE
+  }
+
   type User {
     id: ID!
     firstName: String!
     lastName: String!
     email: String!
     role: Role!
+    AccountStatus: AccountStatus!
+    Store: Store
   }
 
   type AuthPayload {
@@ -33,7 +40,7 @@ export const typeDefs = gql`
   type Mutation {
     register(input: UserInput): AuthPayload
     login(email: String!, password: String!): AuthPayload
-    updateRole(status: String!): AuthResult
+    updateRole(status: Role!): AuthResult
     updatePassword(oldPassword: String!, newPassword: String!): User
   }
 `;

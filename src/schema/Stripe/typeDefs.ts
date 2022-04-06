@@ -12,10 +12,19 @@ export const typeDefs = gql`
     footer: String
   }
 
+  type Address {
+    city: String
+    country: String
+    line1: String
+    line2: String
+    postal_code: String
+    state: String
+  }
+
   type Customer {
     id: String
     object: String
-    address: String
+    address: Address
     balance: Int
     created: Int
     currency: String
@@ -44,6 +53,10 @@ export const typeDefs = gql`
   type responseSub {
     clientSecret: String
     subscription: String
+  }
+
+  type Query {
+    getCustomers: [Customer]!
   }
 
   type Mutation {

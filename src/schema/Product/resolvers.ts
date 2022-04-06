@@ -1,4 +1,5 @@
 import type { Resolvers } from '@generated/types';
+import { multiFileUpload } from '@lib/upload';
 import {
   IProduct,
   Product,
@@ -7,6 +8,7 @@ import {
   IStore,
   Store,
 } from '@models/index';
+import { IFile } from '@ts/types';
 
 export const resolvers: Resolvers = {
   Query: {
@@ -22,6 +24,10 @@ export const resolvers: Resolvers = {
   Mutation: {
     createProduct: async (_, { input }) => {
       // create product in Product model
+      const images = await multiFileUpload(input.thumbnails as IFile[]);
+
+      input.thumbnails = images;
+
       const product: IProduct = await Product.create(input);
 
       // update product array in Store model

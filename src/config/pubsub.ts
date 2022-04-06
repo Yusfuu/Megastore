@@ -9,7 +9,7 @@ const options: RedisOptions = {
   password: REDIS_PASSWORD,
 };
 
-export const pubsub = new RedisPubSub({
-  publisher: new Redis(options),
-  subscriber: new Redis(options),
-});
+const publisher = new Redis(options);
+const subscriber = new Redis(options);
+
+export const pubsub = new RedisPubSub({ publisher, subscriber });
