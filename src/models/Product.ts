@@ -22,7 +22,7 @@ const schema = new Schema<IProduct>({
   brand: { type: Schema.Types.ObjectId, ref: 'Brand' },
   price: { type: Number, required: true },
   discount: { type: Number, required: true, default: 0 },
-  stock: { type: Number },
+  stock: { type: Number, required: true, default: 0 },
   description: { type: String, required: true },
   thumbnails: [{ type: String, required: true }],
 });
