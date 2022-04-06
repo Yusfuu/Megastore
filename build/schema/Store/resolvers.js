@@ -20,6 +20,10 @@ exports.resolvers = {
     },
     Mutation: {
         createStore: async (_, { name, thumbnail }, { user }) => {
+            // update user role if user create store
+            if (user.role === 'USER') {
+                const updatedUser = await index_1.User.findOneAndUpdate({ _id: user.id }, { role: 'SELLER' }, { new: true });
+            }
             const store = await index_1.Store.create({
                 name,
                 thumbnail,

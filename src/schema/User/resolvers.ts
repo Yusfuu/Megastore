@@ -1,10 +1,16 @@
 import type { Resolvers } from '@generated/types';
 import { generateJWT } from '@lib/jwt';
-import { User, IUser } from '@models/index';
+import { User, IUser, IStore } from '@models/index';
 import { AuthenticationError } from 'apollo-server-core';
 import { hash, compare } from 'bcrypt';
 
 export const resolvers: Resolvers = {
+  User: {
+    Store: async ({ Store: id }, _, { dataloader }) => {
+      const store: IStore | null = await dataloader.store.load(id);
+      return store;
+    },
+  },
   Mutation: {
     register: async (_, { input }) => {
       const { email, firstName, lastName } = input!;

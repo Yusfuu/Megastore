@@ -60,27 +60,6 @@ exports.resolvers = {
             };
             return auth;
         },
-        updateRole: async (_, { status }, { user }) => {
-            if (!['USER', 'SELLER'].includes(status)) {
-                throw new apollo_server_core_1.AuthenticationError('You are not allowed to change your role');
-            }
-            if (user.role === status) {
-                return user;
-            }
-            const updatedUser = await index_1.User.findOneAndUpdate({ _id: user.id }, { role: status }, { new: true });
-            if (!updatedUser) {
-                throw new apollo_server_core_1.AuthenticationError('something went wrong');
-            }
-            const auth = {
-                token: (0, jwt_1.generateJWT)({
-                    id: updatedUser.id,
-                    email: updatedUser.email,
-                    role: updatedUser.role,
-                }),
-                user: updatedUser,
-            };
-            return auth;
-        },
         updatePassword: async (_, { oldPassword, newPassword }, { user }) => {
             const currentUser = await index_1.User.findOne({ id: user.id });
             if (!currentUser) {
