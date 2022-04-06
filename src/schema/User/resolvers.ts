@@ -51,7 +51,7 @@ export const resolvers: Resolvers = {
     login: async (_, { email, password }) => {
       // find user by email
       const user = await User.findOne({ email });
-      
+
       // check if user exists
       if (!user) {
         throw new AuthenticationError('Sorry, we could not find your account.');
