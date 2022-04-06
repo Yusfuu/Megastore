@@ -296,14 +296,14 @@ export type Product = {
 };
 
 export type ProductInput = {
-  brand: Scalars['ID'];
-  category: Array<InputMaybe<Scalars['ID']>>;
-  description: Scalars['String'];
-  discount: Scalars['Float'];
-  name: Scalars['String'];
-  price: Scalars['Float'];
-  store: Scalars['ID'];
-  thumbnails: Array<InputMaybe<Scalars['Upload']>>;
+  brand?: InputMaybe<Scalars['ID']>;
+  category?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  description?: InputMaybe<Scalars['String']>;
+  discount?: InputMaybe<Scalars['Float']>;
+  name?: InputMaybe<Scalars['String']>;
+  price?: InputMaybe<Scalars['Float']>;
+  store?: InputMaybe<Scalars['ID']>;
+  thumbnails?: InputMaybe<Array<InputMaybe<Scalars['Upload']>>>;
 };
 
 export type Query = {
@@ -383,13 +383,13 @@ export type SuperInput = {
 
 export type User = {
   __typename?: 'User';
-  AccountStatus: AccountStatus;
-  Store?: Maybe<Store>;
+  accountStatus: AccountStatus;
   email: Scalars['String'];
   firstName: Scalars['String'];
   id: Scalars['ID'];
   lastName: Scalars['String'];
   role: Role;
+  store?: Maybe<Store>;
 };
 
 export type UserInput = {
@@ -761,13 +761,13 @@ export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTyp
 }
 
 export type UserResolvers<ContextType = Context, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
-  AccountStatus?: Resolver<ResolversTypes['AccountStatus'], ParentType, ContextType>;
-  Store?: Resolver<Maybe<ResolversTypes['Store']>, ParentType, ContextType>;
+  accountStatus?: Resolver<ResolversTypes['AccountStatus'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   firstName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   lastName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   role?: Resolver<ResolversTypes['Role'], ParentType, ContextType>;
+  store?: Resolver<Maybe<ResolversTypes['Store']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

@@ -51,7 +51,7 @@ export const resolvers: Resolvers = {
         id,
         {
           $set: {
-            AccountStatus: status,
+            accountStatus: status,
           },
         },
         { new: true }

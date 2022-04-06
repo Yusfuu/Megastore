@@ -10,8 +10,8 @@ export interface IUser {
   email: string;
   password: string;
   role: Role;
-  stores: IStore[];
-  AccountStatus: AccountStatus;
+  store: IStore;
+  accountStatus: AccountStatus;
   isSeller: boolean;
   typeAccount: TypeAccount | null;
 }
@@ -29,7 +29,7 @@ const schema = new Schema<IUser>(
       enum: Role,
       default: Role.USER,
     },
-    AccountStatus: {
+    accountStatus: {
       type: String,
       required: true,
       enum: AccountStatus,
@@ -45,6 +45,10 @@ const schema = new Schema<IUser>(
       required: false,
       enum: TypeAccount,
       default: TypeAccount.BASIC,
+    },
+    store: {
+      type: Schema.Types.ObjectId,
+      ref: 'Store',
     },
   },
   { timestamps: true }

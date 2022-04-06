@@ -26,8 +26,8 @@ export const typeDefs = gql`
     lastName: String!
     email: String!
     role: Role!
-    AccountStatus: AccountStatus!
-    Store: Store
+    accountStatus: AccountStatus!
+    store: Store
   }
 
   type AuthPayload {

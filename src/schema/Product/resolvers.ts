@@ -22,24 +22,34 @@ export const resolvers: Resolvers = {
     },
   },
   Mutation: {
-    createProduct: async (_, { input }) => {
+    createProduct: async (_, { input }, { user }) => {
       // create product in Product model
       const images = await multiFileUpload(input.thumbnails as IFile[]);
 
-      input.thumbnails = images;
-
-      const product: IProduct = await Product.create(input);
+      const product: IProduct = await Product.create({
+        ...input,
+        thumbnails: images,
+      });
 
       // update product array in Store model
-      const store = await Store.updateOne(
-        { _id: input.store },
-        { $addToSet: { products: product.id } }
+      // and decrease product limit by 1
+      await Store.updateOne(
+        { _id: user.store },
+        { $addToSet: { products: product.id }, $inc: { productLimit: -1 } }
       );
 
       return product;
     },
-    deleteProduct: async (_, { id }) => {
-      const product: IProduct | null = await Product.findByIdAndDelete(id);
+    deleteProduct: async (_, { id }, { user }) => {
+      // delete product in Product model
+      const product = await Product.findByIdAndDelete(id);
+
+      // update product array in Store model
+      await Store.updateOne(
+        { _id: user.store },
+        { $unset: { products: product?.id }, $inc: { productLimit: 1 } }
+      );
+
       return product;
     },
     updateProduct: async (_, { id, input }) => {
