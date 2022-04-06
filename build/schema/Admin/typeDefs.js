@@ -13,6 +13,13 @@ exports.typeDefs = (0, apollo_server_express_1.gql) `
   #   filter: StoreFilters
   # }
 
+  type Admin {
+    id: ID!
+    name: String!
+    email: String!
+    password: String!
+  }
+
   type Mutation {
     updateStoreStatus(id: ID!, status: StoreStatus!): Store
   }

@@ -1,4 +1,4 @@
-import { AccountStatus, Role } from '@ts/enums';
+import { AccountStatus, Role, TypeAccount } from '@ts/enums';
 import { Schema, model } from 'mongoose';
 import { IStore } from './Store';
 
@@ -13,6 +13,7 @@ export interface IUser {
   stores: IStore[];
   AccountStatus: AccountStatus;
   isSeller: boolean;
+  typeAccount: TypeAccount | null;
 }
 
 // 2. Create a Schema corresponding to the document interface.
@@ -38,6 +39,12 @@ const schema = new Schema<IUser>(
       type: Boolean,
       required: true,
       default: false,
+    },
+    typeAccount: {
+      type: String,
+      required: false,
+      enum: TypeAccount,
+      default: TypeAccount.BASIC,
     },
   },
   { timestamps: true }

@@ -23,7 +23,11 @@ export const resolvers: Resolvers = {
     },
   },
   Mutation: {
-    createStore: async (_, { name, thumbnail }, { user }) => {
+    createStore: async (
+      _,
+      { name, thumbnail, document_verification },
+      { user }
+    ) => {
       // update user role if user create store
       if (user.role === "USER") {
         const updatedUser: IUser | null = await User.findOneAndUpdate(
@@ -33,12 +37,20 @@ export const resolvers: Resolvers = {
         );
       }
 
-      const images = await multiFileUpload(thumbnail as IFile[]);
+      const promises = [
+        multiFileUpload(document_verification as IFile[]),
+        multiFileUpload(thumbnail as IFile[]),
+      ];
+
+      const [document_verification_url, thumbnail_url] = await Promise.all(
+        promises
+      );
 
       const store: IStore = await Store.create({
         name,
-        thumbnail: images,
+        thumbnail: thumbnail_url,
         owner: user.id,
+        document_verification: document_verification_url,
       });
 
       return store;

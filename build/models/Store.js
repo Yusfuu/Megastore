@@ -6,7 +6,7 @@ const enums_1 = require("../ts/enums");
 // 2. Create a Schema corresponding to the document interface.
 const schema = new mongoose_1.Schema({
     name: { type: String, required: true },
-    thumbnail: { type: String, required: true },
+    thumbnail: [{ type: mongoose_1.Schema.Types.ObjectId, required: true, ref: 'Media' }],
     products: [{ type: mongoose_1.Schema.Types.ObjectId, ref: 'Product' }],
     status: {
         type: String,
@@ -15,6 +15,10 @@ const schema = new mongoose_1.Schema({
         default: enums_1.StoreStatus.INACTIVE,
     },
     owner: { type: mongoose_1.Schema.Types.ObjectId, ref: 'User' },
+    document_verification: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: 'Media',
+    },
 }, { timestamps: true });
 // 3. Create a Model.
 exports.Store = (0, mongoose_1.model)('Store', schema);

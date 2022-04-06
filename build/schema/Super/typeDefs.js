@@ -10,6 +10,12 @@ exports.typeDefs = (0, apollo_server_express_1.gql) `
     password: String!
   }
 
+  input AdminInput {
+    name: String!
+    email: String!
+    password: String!
+  }
+
   input FileInput {
     files: [Upload!]
   }
@@ -31,6 +37,7 @@ exports.typeDefs = (0, apollo_server_express_1.gql) `
     addImage(input: FileInput): [String!]
     confirmUserIsSeller(id: ID!): User
     updateUserAccountStatus(id: ID!, status: AccountStatus!): User
+    createAdmin(input: AdminInput): Admin!
   }
 `;
 //# sourceMappingURL=typeDefs.js.map

@@ -33,6 +33,20 @@ export type Address = {
   state?: Maybe<Scalars['String']>;
 };
 
+export type Admin = {
+  __typename?: 'Admin';
+  email: Scalars['String'];
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  password: Scalars['String'];
+};
+
+export type AdminInput = {
+  email: Scalars['String'];
+  name: Scalars['String'];
+  password: Scalars['String'];
+};
+
 export type ArrayOperatorInput = {
   contains?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
@@ -114,6 +128,7 @@ export type Mutation = {
   addImage?: Maybe<Array<Scalars['String']>>;
   addSuper: Super;
   confirmUserIsSeller?: Maybe<User>;
+  createAdmin: Admin;
   createBrand: Brand;
   createCategory: Category;
   createProduct: Product;
@@ -152,6 +167,11 @@ export type MutationConfirmUserIsSellerArgs = {
 };
 
 
+export type MutationCreateAdminArgs = {
+  input?: InputMaybe<AdminInput>;
+};
+
+
 export type MutationCreateBrandArgs = {
   name: Scalars['String'];
   thumbnail: Scalars['String'];
@@ -169,6 +189,7 @@ export type MutationCreateProductArgs = {
 
 
 export type MutationCreateStoreArgs = {
+  document_verification?: InputMaybe<Scalars['Upload']>;
   name: Scalars['String'];
   thumbnail: Array<InputMaybe<Scalars['Upload']>>;
 };
@@ -471,6 +492,8 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   AccountStatus: AccountStatus;
   Address: ResolverTypeWrapper<Address>;
+  Admin: ResolverTypeWrapper<Admin>;
+  AdminInput: AdminInput;
   ArrayOperatorInput: ArrayOperatorInput;
   AuthPayload: ResolverTypeWrapper<AuthPayload>;
   AuthResult: ResolversTypes['AuthPayload'] | ResolversTypes['User'];
@@ -514,6 +537,8 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Address: Address;
+  Admin: Admin;
+  AdminInput: AdminInput;
   ArrayOperatorInput: ArrayOperatorInput;
   AuthPayload: AuthPayload;
   AuthResult: ResolversParentTypes['AuthPayload'] | ResolversParentTypes['User'];
@@ -567,6 +592,14 @@ export type AddressResolvers<ContextType = Context, ParentType extends Resolvers
   line2?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   postal_code?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type AdminResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Admin'] = ResolversParentTypes['Admin']> = {
+  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -639,6 +672,7 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
   addImage?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType, Partial<MutationAddImageArgs>>;
   addSuper?: Resolver<ResolversTypes['Super'], ParentType, ContextType, Partial<MutationAddSuperArgs>>;
   confirmUserIsSeller?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationConfirmUserIsSellerArgs, 'id'>>;
+  createAdmin?: Resolver<ResolversTypes['Admin'], ParentType, ContextType, Partial<MutationCreateAdminArgs>>;
   createBrand?: Resolver<ResolversTypes['Brand'], ParentType, ContextType, RequireFields<MutationCreateBrandArgs, 'name' | 'thumbnail'>>;
   createCategory?: Resolver<ResolversTypes['Category'], ParentType, ContextType, RequireFields<MutationCreateCategoryArgs, 'name'>>;
   createProduct?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<MutationCreateProductArgs, 'input'>>;
@@ -746,6 +780,7 @@ export type ResponseSubResolvers<ContextType = Context, ParentType extends Resol
 export type Resolvers<ContextType = Context> = {
   AccountStatus?: AccountStatusResolvers;
   Address?: AddressResolvers<ContextType>;
+  Admin?: AdminResolvers<ContextType>;
   AuthPayload?: AuthPayloadResolvers<ContextType>;
   AuthResult?: AuthResultResolvers<ContextType>;
   Brand?: BrandResolvers<ContextType>;

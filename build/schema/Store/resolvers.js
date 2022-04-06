@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.resolvers = void 0;
+const upload_1 = require("../../lib/upload");
 const index_1 = require("../../models/index");
 exports.resolvers = {
     Query: {
@@ -19,15 +20,21 @@ exports.resolvers = {
         },
     },
     Mutation: {
-        createStore: async (_, { name, thumbnail }, { user }) => {
+        createStore: async (_, { name, thumbnail, document_verification }, { user }) => {
             // update user role if user create store
             if (user.role === 'USER') {
                 const updatedUser = await index_1.User.findOneAndUpdate({ _id: user.id }, { role: 'SELLER' }, { new: true });
             }
+            const promises = [
+                (0, upload_1.multiFileUpload)(document_verification),
+                (0, upload_1.multiFileUpload)(thumbnail),
+            ];
+            const [document_verification_url, thumbnail_url] = await Promise.all(promises);
             const store = await index_1.Store.create({
                 name,
-                thumbnail,
+                thumbnail: thumbnail_url,
                 owner: user.id,
+                document_verification: document_verification_url,
             });
             return store;
         },
@@ -44,6 +51,10 @@ exports.resolvers = {
         products: async ({ products: ids }, _, { dataloader }) => {
             const products = await dataloader.product.loadMany(ids);
             return products;
+        },
+        thumbnail: async ({ thumbnail: ids }, _, { dataloader }) => {
+            const images = await dataloader.media.loadMany(ids);
+            return images;
         },
     },
 };

@@ -77,14 +77,3 @@ export const bootstrap = async (schema: GraphQLSchema) => {
     console.log(`👋 Connected to database successfully: ${connection.name}`);
   });
 };
-
-//Files Stream to Azure for now
-// app.use(
-//   "/media/:key",
-//   catchAsync(async (req: Request, res: Response, nex: NextFunction) => {
-//     const { key } = req.params;
-//     const url = await getFileStreamAzure(key);
-//     res.json({ url });
-//     // (await getFileStreamAzure(key))?.pipe(res);
-//   })
-// );

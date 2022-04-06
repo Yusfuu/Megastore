@@ -37,3 +37,10 @@ export enum Mimetype {
   GIF = 'image/gif',
   WEBP = 'image/webp',
 }
+
+export enum TypeAccount {
+  BASIC = 'BASIC',
+  STARTER = 'STARTER',
+  PRO = 'PRO',
+  EXPERT = 'Expert',
+}

@@ -26,6 +26,12 @@ const schema = new mongoose_1.Schema({
         required: true,
         default: false,
     },
+    typeAccount: {
+        type: String,
+        required: false,
+        enum: enums_1.TypeAccount,
+        default: enums_1.TypeAccount.BASIC,
+    },
 }, { timestamps: true });
 // 3. Create a Model.
 exports.User = (0, mongoose_1.model)('User', schema);

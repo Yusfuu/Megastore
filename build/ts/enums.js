@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Mimetype = exports.DeliveryStatus = exports.DeliveryType = exports.Sort = exports.AccountStatus = exports.StoreStatus = exports.Role = void 0;
+exports.TypeAccount = exports.Mimetype = exports.DeliveryStatus = exports.DeliveryType = exports.Sort = exports.AccountStatus = exports.StoreStatus = exports.Role = void 0;
 var Role;
 (function (Role) {
     Role["USER"] = "USER";
@@ -41,4 +41,11 @@ var Mimetype;
     Mimetype["GIF"] = "image/gif";
     Mimetype["WEBP"] = "image/webp";
 })(Mimetype = exports.Mimetype || (exports.Mimetype = {}));
+var TypeAccount;
+(function (TypeAccount) {
+    TypeAccount["BASIC"] = "BASIC";
+    TypeAccount["STARTER"] = "STARTER";
+    TypeAccount["PRO"] = "PRO";
+    TypeAccount["EXPERT"] = "Expert";
+})(TypeAccount = exports.TypeAccount || (exports.TypeAccount = {}));
 //# sourceMappingURL=enums.js.map

@@ -6,3 +6,4 @@ export { Category, ICategory } from './Category';
 export { Store, IStore } from './Store';
 export { Product, IProduct } from './Product';
 export { Cart, ICart } from './Cart';
+export { Admin, IAdmin } from './Admin';
