@@ -1,5 +1,6 @@
 import { AccountStatus, Role } from '@ts/enums';
 import { Schema, model } from 'mongoose';
+import { IMedia } from './Media';
 import { IStore } from './Store';
 
 // 1. Create an interface representing a document in MongoDB.

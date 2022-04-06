@@ -65,7 +65,11 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    createStore(name: String!, thumbnail: [Upload]!): Store!
+    createStore(
+      name: String!
+      thumbnail: [Upload]!
+      document_verification: Upload
+    ): Store!
     deleteStore(id: ID!): Store
   }
 `;

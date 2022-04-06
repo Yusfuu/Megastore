@@ -189,6 +189,7 @@ export type MutationCreateProductArgs = {
 
 
 export type MutationCreateStoreArgs = {
+  document_verification?: InputMaybe<Scalars['Upload']>;
   name: Scalars['String'];
   thumbnail: Array<InputMaybe<Scalars['Upload']>>;
 };

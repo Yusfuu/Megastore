@@ -11,6 +11,7 @@ export interface IStore {
   products: IProduct[];
   owner: IUser;
   status: StoreStatus;
+  document_verification: IMedia;
 }
 
 export interface PaginatedStore {
@@ -34,6 +35,10 @@ const schema = new Schema<IStore>(
       default: StoreStatus.INACTIVE,
     },
     owner: { type: Schema.Types.ObjectId, ref: 'User' },
+    document_verification: {
+      type: Schema.Types.ObjectId,
+      ref: 'Media',
+    },
   },
   { timestamps: true }
 );
