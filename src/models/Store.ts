@@ -1,12 +1,13 @@
 import { Schema, model } from 'mongoose';
 import { IProduct, IUser } from '@models/index';
 import { StoreStatus } from '@ts/enums';
+import { IMedia } from './Media';
 
 // 1. Create an interface representing a document in MongoDB.
 export interface IStore {
   id: string;
   name: string;
-  thumbnail: string;
+  thumbnail: IMedia[];
   products: IProduct[];
   owner: IUser;
   status: StoreStatus;
@@ -24,7 +25,7 @@ export interface PaginatedStore {
 const schema = new Schema<IStore>(
   {
     name: { type: String, required: true },
-    thumbnail: { type: String, required: true },
+    thumbnail: [{ type: Schema.Types.ObjectId, required: true, ref: 'Media' }],
     products: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
     status: {
       type: String,

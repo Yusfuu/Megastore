@@ -1,6 +1,6 @@
 import DataLoader from 'dataloader';
 import { Model } from 'mongoose';
-import { Store, Brand, Product, Category, User } from '@models/index';
+import { Store, Brand, Product, Category, User, Media } from '@models/index';
 
 // create a dataloader for the given model
 export const createLoader = (Model: Model<any>) => {
@@ -23,4 +23,5 @@ export const dataloader = {
   category: createLoader(Category),
   product: createLoader(Product),
   user: createLoader(User),
+  media: createLoader(Media),
 };

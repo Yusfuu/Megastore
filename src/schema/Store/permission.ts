@@ -4,7 +4,7 @@ import { and } from 'graphql-shield';
 const permission = {
   Query: {},
   Mutation: {
-    createStore: and(isAuthenticated, isSeller),
+    createStore: and(isAuthenticated),
     deleteStore: and(isAuthenticated, isSeller),
   },
 };

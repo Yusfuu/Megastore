@@ -52,7 +52,7 @@ export const typeDefs = gql`
   type Store {
     id: ID!
     name: String!
-    thumbnail: String!
+    thumbnail: [Media]!
     products: [Product]!
     owner: User!
     status: StoreStatus!
@@ -65,7 +65,7 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    createStore(name: String!, thumbnail: String!): Store!
+    createStore(name: String!, thumbnail: [Upload]!): Store!
     deleteStore(id: ID!): Store
   }
 `;

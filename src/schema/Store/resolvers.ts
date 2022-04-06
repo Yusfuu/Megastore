@@ -1,5 +1,7 @@
 import type { Resolvers } from '@generated/types';
+import { multiFileUpload } from '@lib/upload';
 import { Store, IStore, IUser, IProduct, User } from '@models/index';
+import { IFile } from '@ts/types';
 
 export const resolvers: Resolvers = {
   Query: {
@@ -31,11 +33,14 @@ export const resolvers: Resolvers = {
         );
       }
 
+      const images = await multiFileUpload(thumbnail as IFile[]);
+
       const store: IStore = await Store.create({
         name,
-        thumbnail,
+        thumbnail: images,
         owner: user.id,
       });
+
       return store;
     },
     deleteStore: async (_, { id }) => {
@@ -51,6 +56,10 @@ export const resolvers: Resolvers = {
     products: async ({ products: ids }, _, { dataloader }) => {
       const products: IProduct[] = await dataloader.product.loadMany(ids);
       return products;
+    },
+    thumbnail: async ({ thumbnail: ids }, _, { dataloader }) => {
+      const images = await dataloader.media.loadMany(ids);
+      return images;
     },
   },
 };
