@@ -1,7 +1,7 @@
 import { Role } from '../ts/enums';
 import { StoreStatus } from '../ts/enums';
 import { Sort } from '../ts/enums';
-import { AccountStatus } from '../enums';
+import { AccountStatus } from '../ts/enums';
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 import { Context } from '../config/context';
 export type Maybe<T> = T | null;

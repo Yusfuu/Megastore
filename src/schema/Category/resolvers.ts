@@ -1,10 +1,10 @@
-import type { Resolvers } from "@generated/types";
-import { Category, ICategory } from "@models/index";
+import type { Resolvers } from '@generated/types';
+import { Category, ICategory } from '@models/index';
 
 export const resolvers: Resolvers = {
   Mutation: {
-    createCategory: async (_, { name, path }) => {
-      const category: ICategory = await Category.create({ name, path });
+    createCategory: async (_, { name }) => {
+      const category: ICategory = await Category.create({ name });
       return category;
     },
     deleteCategory: async (_, { id }) => {

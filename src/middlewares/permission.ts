@@ -24,3 +24,9 @@ export const isAdmin = rule({ cache: 'contextual' })(
     return ctx.user.role === Role.ADMIN;
   }
 );
+
+export const isSuperAdmin = rule({ cache: 'contextual' })(
+  async (parent, args, ctx) => {
+    return ctx.user.role === Role.SUPER_ADMIN;
+  }
+);
