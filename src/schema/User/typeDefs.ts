@@ -27,6 +27,7 @@ export const typeDefs = gql`
     email: String!
     role: Role!
     accountStatus: AccountStatus!
+    isSeller: Boolean!
     store: Store
   }
 

@@ -11,7 +11,7 @@ export interface IStore {
   products: IProduct[];
   owner: IUser;
   status: StoreStatus;
-  document_verification: IMedia;
+  document_verification: IMedia[];
   limit_product: ProductLimit.STARTER | null;
 }
 
@@ -36,10 +36,12 @@ const schema = new Schema<IStore>(
       default: StoreStatus.INACTIVE,
     },
     owner: { type: Schema.Types.ObjectId, ref: 'User' },
-    document_verification: {
-      type: Schema.Types.ObjectId,
-      ref: 'Media',
-    },
+    document_verification: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Media',
+      },
+    ],
     limit_product: {
       type: Number,
       enum: ProductLimit,

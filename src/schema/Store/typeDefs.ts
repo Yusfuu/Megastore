@@ -53,6 +53,7 @@ export const typeDefs = gql`
     id: ID!
     name: String!
     thumbnail: [Media]!
+    document_verification: [Media]!
     products: [Product]!
     owner: User!
     status: StoreStatus!
@@ -68,7 +69,7 @@ export const typeDefs = gql`
     createStore(
       name: String!
       thumbnail: [Upload]!
-      document_verification: Upload
+      document_verification: [Upload]!
     ): Store!
     deleteStore(id: ID!): Store
   }

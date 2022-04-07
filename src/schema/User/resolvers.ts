@@ -6,7 +6,7 @@ import { hash, compare } from 'bcrypt';
 
 export const resolvers: Resolvers = {
   User: {
-    store: async ({ store: id }, _, { dataloader }) => {
+    store: async ({ id }, _, { dataloader }) => {
       const store: IStore | null = await dataloader.store.load(id);
       return store;
     },
