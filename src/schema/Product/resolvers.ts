@@ -23,6 +23,12 @@ export const resolvers: Resolvers = {
   },
   Mutation: {
     createProduct: async (_, { input }, { user }) => {
+      const store = await Store.findOne({ id: user.store });
+
+      if (store?.limit_product === 0) {
+        throw new Error('Store limit product is 0');
+      }
+
       // create product in Product model
       const images = await multiFileUpload(input.thumbnails as IFile[]);
 
@@ -30,9 +36,10 @@ export const resolvers: Resolvers = {
         ...input,
         thumbnails: images,
       });
-
       // update product array in Store model
       // and decrease product limit by 1
+
+      // check if produc limit is not exceeded
       await Store.updateOne(
         { _id: user.store },
         { $addToSet: { products: product.id }, $inc: { productLimit: -1 } }

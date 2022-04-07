@@ -8,7 +8,6 @@ export const typeDefs = gql`
     price: Float
     discount: Float
     thumbnails: [Upload]
-    store: ID
     brand: String
     category: [ID]
   }

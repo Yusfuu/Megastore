@@ -287,7 +287,6 @@ export type ProductInput = {
   discount?: InputMaybe<Scalars['Float']>;
   name?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['Float']>;
-  store?: InputMaybe<Scalars['ID']>;
   thumbnails?: InputMaybe<Array<InputMaybe<Scalars['Upload']>>>;
 };
 
