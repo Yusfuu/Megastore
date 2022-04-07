@@ -3,7 +3,7 @@ import { multiFileUpload } from '@lib/upload';
 import {
   IProduct,
   Product,
-  IBrand,
+  // IBrand,
   ICategory,
   IStore,
   Store,
@@ -62,10 +62,10 @@ export const resolvers: Resolvers = {
     },
   },
   Product: {
-    brand: async ({ brand: id }, args, { dataloader }) => {
-      const brand: IBrand | null = await dataloader.brand.load(id);
-      return brand;
-    },
+    // brand: async ({ brand: id }, args, { dataloader }) => {
+    //   const brand: IBrand | null = await dataloader.brand.load(id);
+    //   return brand;
+    // },
     category: async ({ category: ids }, args, { dataloader }) => {
       const categories: ICategory[] = await dataloader.category.loadMany(ids);
       return categories;

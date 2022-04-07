@@ -283,7 +283,7 @@ export type PaginateEntity = {
 
 export type Product = {
   __typename?: 'Product';
-  brand?: Maybe<Brand>;
+  brand: Scalars['String'];
   category: Array<Maybe<Category>>;
   description: Scalars['String'];
   discount: Scalars['Float'];
@@ -296,7 +296,7 @@ export type Product = {
 };
 
 export type ProductInput = {
-  brand?: InputMaybe<Scalars['ID']>;
+  brand?: InputMaybe<Scalars['String']>;
   category?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   description?: InputMaybe<Scalars['String']>;
   discount?: InputMaybe<Scalars['Float']>;
@@ -718,7 +718,7 @@ export type PaginateEntityResolvers<ContextType = Context, ParentType extends Re
 };
 
 export type ProductResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = {
-  brand?: Resolver<Maybe<ResolversTypes['Brand']>, ParentType, ContextType>;
+  brand?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   category?: Resolver<Array<Maybe<ResolversTypes['Category']>>, ParentType, ContextType>;
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   discount?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
