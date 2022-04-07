@@ -381,6 +381,13 @@ export type SuperInput = {
   password: Scalars['String'];
 };
 
+export enum TypeAccountEnum {
+  Basic = 'BASIC',
+  Expert = 'EXPERT',
+  Pro = 'PRO',
+  Starter = 'STARTER'
+}
+
 export type User = {
   __typename?: 'User';
   AccountStatus: AccountStatus;
@@ -388,8 +395,10 @@ export type User = {
   email: Scalars['String'];
   firstName: Scalars['String'];
   id: Scalars['ID'];
+  isSeller: Scalars['Boolean'];
   lastName: Scalars['String'];
   role: Role;
+  typeAccount?: Maybe<TypeAccountEnum>;
 };
 
 export type UserInput = {
@@ -525,6 +534,7 @@ export type ResolversTypes = {
   StringQueryOperatorInput: StringQueryOperatorInput;
   Super: ResolverTypeWrapper<Super>;
   SuperInput: SuperInput;
+  TypeAccountEnum: TypeAccountEnum;
   Upload: ResolverTypeWrapper<Scalars['Upload']>;
   User: ResolverTypeWrapper<User>;
   UserInput: UserInput;
@@ -766,8 +776,10 @@ export type UserResolvers<ContextType = Context, ParentType extends ResolversPar
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   firstName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  isSeller?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   lastName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   role?: Resolver<ResolversTypes['Role'], ParentType, ContextType>;
+  typeAccount?: Resolver<Maybe<ResolversTypes['TypeAccountEnum']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

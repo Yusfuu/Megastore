@@ -5,12 +5,6 @@ import { AuthenticationError } from "apollo-server-core";
 import { hash, compare } from "bcrypt";
 
 export const resolvers: Resolvers = {
-  User: {
-    Store: async ({ Store: id }, _, { dataloader }) => {
-      const store: IStore | null = await dataloader.store.load(id);
-      return store;
-    },
-  },
   Mutation: {
     register: async (_, { input }) => {
       const { email, firstName, lastName, password } = input!;
@@ -108,6 +102,14 @@ export const resolvers: Resolvers = {
   AuthResult: {
     __resolveType(obj: any) {
       return obj.token ? "AuthPayload" : "User";
+    },
+  },
+
+  User: {
+    Store: async ({ Store: id, isSeller }, _, { dataloader }) => {
+      if (!isSeller) return null;
+      const store = await dataloader.store.load(id);
+      return store;
     },
   },
 };
