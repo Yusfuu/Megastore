@@ -22,14 +22,23 @@ exports.typeDefs = (0, apollo_server_express_1.gql) `
     INACTIVE
   }
 
+  enum TypeAccountEnum {
+    BASIC
+    STARTER
+    PRO
+    EXPERT
+  }
+
   type User {
     id: ID!
     firstName: String!
     lastName: String!
     email: String!
     role: Role!
-    AccountStatus: AccountStatus!
+    isSeller: Boolean!
+    accountStatus: AccountStatus!
     Store: Store
+    typeAccount: TypeAccountEnum!
   }
 
   type AuthPayload {

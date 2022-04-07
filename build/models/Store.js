@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Store = void 0;
 const mongoose_1 = require("mongoose");
-const enums_1 = require("../ts/enums");
+const enums_1 = require("@ts/enums");
 // 2. Create a Schema corresponding to the document interface.
 const schema = new mongoose_1.Schema({
     name: { type: String, required: true },
@@ -18,6 +18,11 @@ const schema = new mongoose_1.Schema({
     document_verification: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: 'Media',
+    },
+    limit_product: {
+        type: Number,
+        enum: enums_1.ProductLimit,
+        default: enums_1.ProductLimit.STARTER,
     },
 }, { timestamps: true });
 // 3. Create a Model.

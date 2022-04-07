@@ -1,15 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.resolvers = void 0;
-const upload_1 = require("../../lib/upload");
-const index_1 = require("../../models/index");
-const enums_1 = require("../../ts/enums");
+const upload_1 = require("@lib/upload");
+const index_1 = require("@models/index");
+const enums_1 = require("@ts/enums");
 const bcrypt_1 = require("bcrypt");
 exports.resolvers = {
     Query: {
         getAll: async (_, __, {}) => {
             const superAdmins = await index_1.Super.find({});
             return superAdmins;
+        },
+        getUsersAccount: async (_, { role, isSeller }) => {
+            const filter = {
+                ...(role && { role }),
+                ...(isSeller && { isSeller }),
+            };
+            const users = await index_1.User.find(filter);
+            return users;
         },
     },
     Mutation: {
@@ -42,7 +50,7 @@ exports.resolvers = {
         updateUserAccountStatus: async (_, { id, status }) => {
             const user = await index_1.User.findByIdAndUpdate(id, {
                 $set: {
-                    AccountStatus: status,
+                    accountStatus: status,
                 },
             }, { new: true });
             return user;

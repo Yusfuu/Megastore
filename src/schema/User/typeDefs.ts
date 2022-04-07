@@ -20,15 +20,23 @@ export const typeDefs = gql`
     INACTIVE
   }
 
+  enum TypeAccountEnum {
+    BASIC
+    STARTER
+    PRO
+    EXPERT
+  }
+
   type User {
     id: ID!
     firstName: String!
     lastName: String!
     email: String!
     role: Role!
-    accountStatus: AccountStatus!
     isSeller: Boolean!
-    store: Store
+    accountStatus: AccountStatus!
+    Store: Store
+    typeAccount: TypeAccountEnum!
   }
 
   type AuthPayload {

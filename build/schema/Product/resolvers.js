@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.resolvers = void 0;
-const upload_1 = require("../../lib/upload");
-const index_1 = require("../../models/index");
+const upload_1 = require("@lib/upload");
+const index_1 = require("@models/index");
 exports.resolvers = {
     Query: {
         products: async (parent, args) => {
@@ -15,17 +15,23 @@ exports.resolvers = {
         },
     },
     Mutation: {
-        createProduct: async (_, { input }) => {
+        createProduct: async (_, { input }, { user }) => {
             // create product in Product model
             const images = await (0, upload_1.multiFileUpload)(input.thumbnails);
-            input.thumbnails = images;
-            const product = await index_1.Product.create(input);
+            const product = await index_1.Product.create({
+                ...input,
+                thumbnails: images,
+            });
             // update product array in Store model
-            const store = await index_1.Store.updateOne({ _id: input.store }, { $addToSet: { products: product.id } });
+            // and decrease product limit by 1
+            await index_1.Store.updateOne({ _id: user.store }, { $addToSet: { products: product.id }, $inc: { productLimit: -1 } });
             return product;
         },
-        deleteProduct: async (_, { id }) => {
+        deleteProduct: async (_, { id }, { user }) => {
+            // delete product in Product model
             const product = await index_1.Product.findByIdAndDelete(id);
+            // update product array in Store model
+            await index_1.Store.updateOne({ _id: user.store }, { $unset: { products: product?.id }, $inc: { productLimit: 1 } });
             return product;
         },
         updateProduct: async (_, { id, input }) => {

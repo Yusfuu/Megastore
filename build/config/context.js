@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.context = void 0;
 const pubsub_1 = require("./pubsub");
-const loader_1 = require("../middlewares/loader");
-const jwt_1 = require("../lib/jwt");
+const loader_1 = require("@middlewares/loader");
+const jwt_1 = require("@lib/jwt");
 const context = async ({ req }) => {
     // get the user token from the headers
     const bearer = req.headers.authorization || '';

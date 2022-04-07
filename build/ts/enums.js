@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TypeAccount = exports.Mimetype = exports.DeliveryStatus = exports.DeliveryType = exports.Sort = exports.AccountStatus = exports.StoreStatus = exports.Role = void 0;
+exports.ProductLimit = exports.TypeAccount = exports.Mimetype = exports.DeliveryStatus = exports.DeliveryType = exports.Sort = exports.AccountStatus = exports.StoreStatus = exports.Role = void 0;
 var Role;
 (function (Role) {
     Role["USER"] = "USER";
@@ -48,4 +48,10 @@ var TypeAccount;
     TypeAccount["PRO"] = "PRO";
     TypeAccount["EXPERT"] = "Expert";
 })(TypeAccount = exports.TypeAccount || (exports.TypeAccount = {}));
+var ProductLimit;
+(function (ProductLimit) {
+    ProductLimit[ProductLimit["STARTER"] = 10] = "STARTER";
+    ProductLimit[ProductLimit["PRO"] = 50] = "PRO";
+    ProductLimit[ProductLimit["EXPERT"] = -1] = "EXPERT";
+})(ProductLimit = exports.ProductLimit || (exports.ProductLimit = {}));
 //# sourceMappingURL=enums.js.map

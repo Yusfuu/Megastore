@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.resolvers = void 0;
-const upload_1 = require("../../lib/upload");
-const index_1 = require("../../models/index");
+const upload_1 = require("@lib/upload");
+const index_1 = require("@models/index");
 exports.resolvers = {
     Query: {
         stores: async (parent, args) => {
@@ -23,7 +23,7 @@ exports.resolvers = {
         createStore: async (_, { name, thumbnail, document_verification }, { user }) => {
             // update user role if user create store
             if (user.role === 'USER') {
-                const updatedUser = await index_1.User.findOneAndUpdate({ _id: user.id }, { role: 'SELLER' }, { new: true });
+                await index_1.User.updateOne({ id: user.id }, { role: 'SELLER' });
             }
             const promises = [
                 (0, upload_1.multiFileUpload)(document_verification),

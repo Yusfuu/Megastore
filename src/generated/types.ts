@@ -189,7 +189,7 @@ export type MutationCreateProductArgs = {
 
 
 export type MutationCreateStoreArgs = {
-  document_verification: Array<InputMaybe<Scalars['Upload']>>;
+  document_verification?: InputMaybe<Scalars['Upload']>;
   name: Scalars['String'];
   thumbnail: Array<InputMaybe<Scalars['Upload']>>;
 };
@@ -353,7 +353,7 @@ export { Sort };
 
 export type Store = {
   __typename?: 'Store';
-  document_verification: Array<Maybe<Media>>;
+  document_verification?: Maybe<Media>;
   id: Scalars['ID'];
   name: Scalars['String'];
   owner: User;
@@ -389,8 +389,16 @@ export type SuperInput = {
   password: Scalars['String'];
 };
 
+export enum TypeAccountEnum {
+  Basic = 'BASIC',
+  Expert = 'EXPERT',
+  Pro = 'PRO',
+  Starter = 'STARTER'
+}
+
 export type User = {
   __typename?: 'User';
+  Store?: Maybe<Store>;
   accountStatus: AccountStatus;
   email: Scalars['String'];
   firstName: Scalars['String'];
@@ -398,7 +406,7 @@ export type User = {
   isSeller: Scalars['Boolean'];
   lastName: Scalars['String'];
   role: Role;
-  store?: Maybe<Store>;
+  typeAccount: TypeAccountEnum;
 };
 
 export type UserInput = {
@@ -534,6 +542,7 @@ export type ResolversTypes = {
   StringQueryOperatorInput: StringQueryOperatorInput;
   Super: ResolverTypeWrapper<Super>;
   SuperInput: SuperInput;
+  TypeAccountEnum: TypeAccountEnum;
   Upload: ResolverTypeWrapper<Scalars['Upload']>;
   User: ResolverTypeWrapper<User>;
   UserInput: UserInput;
@@ -685,7 +694,7 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
   createBrand?: Resolver<ResolversTypes['Brand'], ParentType, ContextType, RequireFields<MutationCreateBrandArgs, 'name' | 'thumbnail'>>;
   createCategory?: Resolver<ResolversTypes['Category'], ParentType, ContextType, RequireFields<MutationCreateCategoryArgs, 'name'>>;
   createProduct?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<MutationCreateProductArgs, 'input'>>;
-  createStore?: Resolver<ResolversTypes['Store'], ParentType, ContextType, RequireFields<MutationCreateStoreArgs, 'document_verification' | 'name' | 'thumbnail'>>;
+  createStore?: Resolver<ResolversTypes['Store'], ParentType, ContextType, RequireFields<MutationCreateStoreArgs, 'name' | 'thumbnail'>>;
   deleteBrand?: Resolver<Maybe<ResolversTypes['Brand']>, ParentType, ContextType, RequireFields<MutationDeleteBrandArgs, 'id'>>;
   deleteCategory?: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType, RequireFields<MutationDeleteCategoryArgs, 'id'>>;
   deleteProduct?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<MutationDeleteProductArgs, 'id'>>;
@@ -748,7 +757,7 @@ export type RoleResolvers = EnumResolverSignature<{ ADMIN?: any, SELLER?: any, U
 export type SortResolvers = EnumResolverSignature<{ ascending?: any, descending?: any }, ResolversTypes['Sort']>;
 
 export type StoreResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Store'] = ResolversParentTypes['Store']> = {
-  document_verification?: Resolver<Array<Maybe<ResolversTypes['Media']>>, ParentType, ContextType>;
+  document_verification?: Resolver<Maybe<ResolversTypes['Media']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   owner?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
@@ -772,6 +781,7 @@ export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTyp
 }
 
 export type UserResolvers<ContextType = Context, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
+  Store?: Resolver<Maybe<ResolversTypes['Store']>, ParentType, ContextType>;
   accountStatus?: Resolver<ResolversTypes['AccountStatus'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   firstName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -779,7 +789,7 @@ export type UserResolvers<ContextType = Context, ParentType extends ResolversPar
   isSeller?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   lastName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   role?: Resolver<ResolversTypes['Role'], ParentType, ContextType>;
-  store?: Resolver<Maybe<ResolversTypes['Store']>, ParentType, ContextType>;
+  typeAccount?: Resolver<ResolversTypes['TypeAccountEnum'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
-const enums_1 = require("../ts/enums");
+const enums_1 = require("@ts/enums");
 const mongoose_1 = require("mongoose");
 // 2. Create a Schema corresponding to the document interface.
 const schema = new mongoose_1.Schema({
@@ -15,7 +15,7 @@ const schema = new mongoose_1.Schema({
         enum: enums_1.Role,
         default: enums_1.Role.USER,
     },
-    AccountStatus: {
+    accountStatus: {
         type: String,
         required: true,
         enum: enums_1.AccountStatus,
@@ -31,6 +31,10 @@ const schema = new mongoose_1.Schema({
         required: false,
         enum: enums_1.TypeAccount,
         default: enums_1.TypeAccount.BASIC,
+    },
+    store: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: 'Store',
     },
 }, { timestamps: true });
 // 3. Create a Model.

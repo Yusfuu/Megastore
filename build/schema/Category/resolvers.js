@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.resolvers = void 0;
-const index_1 = require("../../models/index");
+const index_1 = require("@models/index");
 exports.resolvers = {
     Mutation: {
         createCategory: async (_, { name }) => {

@@ -55,6 +55,7 @@ exports.typeDefs = (0, apollo_server_express_1.gql) `
     id: ID!
     name: String!
     thumbnail: [Media]!
+    document_verification: Media
     products: [Product]!
     owner: User!
     status: StoreStatus!

@@ -13,7 +13,7 @@ export interface IUser {
   store: IStore;
   accountStatus: AccountStatus;
   isSeller: boolean;
-  typeAccount: TypeAccount | null;
+  typeAccount: TypeAccount;
 }
 
 // 2. Create a Schema corresponding to the document interface.

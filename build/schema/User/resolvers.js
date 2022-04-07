@@ -1,28 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.resolvers = void 0;
-const jwt_1 = require("../../lib/jwt");
-const index_1 = require("../../models/index");
+const jwt_1 = require("@lib/jwt");
+const index_1 = require("@models/index");
 const apollo_server_core_1 = require("apollo-server-core");
 const bcrypt_1 = require("bcrypt");
 exports.resolvers = {
-    User: {
-        Store: async ({ Store: id }, _, { dataloader }) => {
-            const store = await dataloader.store.load(id);
-            return store;
-        },
-    },
     Mutation: {
         register: async (_, { input }) => {
-            const { email, firstName, lastName } = input;
+            const { email, firstName, lastName, password } = input;
             // hash password
-            const password = await (0, bcrypt_1.hash)(input?.password, 10);
+            const passwordHash = await (0, bcrypt_1.hash)(password, 10);
             // save user in database
             const user = await index_1.User.create({
                 firstName,
                 lastName,
                 email,
-                password,
+                password: passwordHash,
             }).catch((err) => (err.code === 11000 ? null : undefined));
             if (user === undefined) {
                 throw new apollo_server_core_1.AuthenticationError('something went wrong');
@@ -45,6 +39,7 @@ exports.resolvers = {
         login: async (_, { email, password }) => {
             // find user by email
             const user = await index_1.User.findOne({ email });
+            console.log(user);
             // check if user exists
             if (!user) {
                 throw new apollo_server_core_1.AuthenticationError('Sorry, we could not find your account.');
@@ -86,6 +81,14 @@ exports.resolvers = {
     AuthResult: {
         __resolveType(obj) {
             return obj.token ? 'AuthPayload' : 'User';
+        },
+    },
+    User: {
+        Store: async ({ Store: id, isSeller }, _, { dataloader }) => {
+            if (!isSeller)
+                return null;
+            const store = await dataloader.store.load(id);
+            return store;
         },
     },
 };
