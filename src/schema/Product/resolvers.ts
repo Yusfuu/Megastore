@@ -49,7 +49,11 @@ export const resolvers: Resolvers = {
     },
     deleteProduct: async (_, { id }, { user }) => {
       // delete product in Product model
-      const product = await Product.findByIdAndDelete(id);
+      const product: IProduct | null = await Product.findByIdAndDelete(id);
+
+      if (!product) {
+        throw new Error('Product not found');
+      }
 
       // update product array in Store model
       await Store.updateOne(
