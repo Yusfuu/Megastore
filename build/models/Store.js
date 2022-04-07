@@ -19,6 +19,10 @@ const schema = new mongoose_1.Schema({
         type: mongoose_1.Schema.Types.ObjectId,
         ref: 'Media',
     },
+    limit_product: {
+        type: Number,
+        default: 0,
+    },
 }, { timestamps: true });
 // 3. Create a Model.
 exports.Store = (0, mongoose_1.model)('Store', schema);

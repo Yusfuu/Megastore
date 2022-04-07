@@ -2,11 +2,6 @@ import { gql } from 'apollo-server-express';
 
 // Construct a schema, using GraphQL schema language
 export const typeDefs = gql`
-  enum StoreStatus {
-    ACTIVE
-    INACTIVE
-  }
-
   # type PaginateStore implements PaginateEntity {
   #   data: [Store!]!
   #   pageInfo: PageInfo!
@@ -21,32 +16,37 @@ export const typeDefs = gql`
   #   status: StoreStatus!
   # }
 
-  input NumberQueryOperatorInput {
-    eq: String
-    ne: String
-    gt: String
-    gte: String
-    lt: String
-    lte: String
-    in: [String]
-    nin: [String]
-    between: [String]
-  }
+  # input NumberQueryOperatorInput {
+  #   eq: String
+  #   ne: String
+  #   gt: String
+  #   gte: String
+  #   lt: String
+  #   lte: String
+  #   in: [String]
+  #   nin: [String]
+  #   between: [String]
+  # }
 
-  input StringQueryOperatorInput {
-    eq: String
-    ne: String
-    in: [String]
-    nin: [String]
-    regex: String
-  }
+  # input StringQueryOperatorInput {
+  #   eq: String
+  #   ne: String
+  #   in: [String]
+  #   nin: [String]
+  #   regex: String
+  # }
 
-  input ArrayOperatorInput {
-    contains: [String]
-  }
+  # input ArrayOperatorInput {
+  #   contains: [String]
+  # }
 
-  input StoreFilterInput {
-    id: ID
+  # input StoreFilterInput {
+  #   id: ID
+  # }
+
+  enum StoreStatus {
+    ACTIVE
+    INACTIVE
   }
 
   type Store {
@@ -56,6 +56,8 @@ export const typeDefs = gql`
     products: [Product]!
     owner: User!
     status: StoreStatus!
+    limit_product: Int
+    document_verification: Media
   }
 
   type Query {

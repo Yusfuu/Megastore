@@ -2,7 +2,6 @@ export enum Role {
   USER = 'USER',
   SELLER = 'SELLER',
   ADMIN = 'ADMIN',
-  SUPER_ADMIN = 'SUPER_ADMIN',
 }
 
 export enum StoreStatus {
@@ -42,11 +41,5 @@ export enum TypeAccount {
   BASIC = 'BASIC',
   STARTER = 'STARTER',
   PRO = 'PRO',
-  EXPERT = 'Expert',
-}
-
-export enum ProductLimit {
-  STARTER = 10,
-  PRO = 50,
-  EXPERT = -1,
+  EXPERT = 'EXPERT',
 }

@@ -7,7 +7,7 @@ const schema = new mongoose_1.Schema({
     name: { type: String, required: true },
     store: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Store' },
     category: [{ type: mongoose_1.Schema.Types.ObjectId, ref: 'Category', required: true }],
-    brand: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Brand' },
+    brand: { type: String, required: true },
     price: { type: Number, required: true },
     discount: { type: Number, required: true, default: 0 },
     stock: { type: Number, required: true, default: 0 },

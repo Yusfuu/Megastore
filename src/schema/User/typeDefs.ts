@@ -1,4 +1,4 @@
-import { gql } from "apollo-server-express";
+import { gql } from 'apollo-server-express';
 
 // Construct a schema, using GraphQL schema language
 export const typeDefs = gql`
@@ -20,7 +20,7 @@ export const typeDefs = gql`
     INACTIVE
   }
 
-  enum TypeAccountEnum {
+  enum TypeAccount {
     BASIC
     STARTER
     PRO
@@ -34,9 +34,9 @@ export const typeDefs = gql`
     email: String!
     role: Role!
     isSeller: Boolean!
-    AccountStatus: AccountStatus!
-    Store: Store
-    typeAccount: TypeAccountEnum
+    accountStatus: AccountStatus
+    store: Store
+    typeAccount: TypeAccount
   }
 
   type AuthPayload {

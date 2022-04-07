@@ -1,13 +1,13 @@
-import type { Resolvers } from "@generated/types";
-import { multiFileUpload } from "@lib/upload";
-import { Store, IStore, IUser, IProduct, User } from "@models/index";
-import { IFile } from "@ts/types";
+import type { Resolvers } from '@generated/types';
+import { multiFileUpload } from '@lib/upload';
+import { Store, IStore, IUser, IProduct, User } from '@models/index';
+import { IFile } from '@ts/types';
 
 export const resolvers: Resolvers = {
   Query: {
     stores: async (parent, args) => {
       const status = args.status;
-      const sort = args.sort || "ascending";
+      const sort = args.sort || 'ascending';
 
       const filter = {
         ...(status && { status }),
@@ -19,6 +19,7 @@ export const resolvers: Resolvers = {
     },
     store: async (_, { id }) => {
       const store: IStore | null = await Store.findById(id);
+
       return store;
     },
   },

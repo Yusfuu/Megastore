@@ -4,11 +4,6 @@ exports.typeDefs = void 0;
 const apollo_server_express_1 = require("apollo-server-express");
 // Construct a schema, using GraphQL schema language
 exports.typeDefs = (0, apollo_server_express_1.gql) `
-  enum StoreStatus {
-    ACTIVE
-    INACTIVE
-  }
-
   # type PaginateStore implements PaginateEntity {
   #   data: [Store!]!
   #   pageInfo: PageInfo!
@@ -23,32 +18,37 @@ exports.typeDefs = (0, apollo_server_express_1.gql) `
   #   status: StoreStatus!
   # }
 
-  input NumberQueryOperatorInput {
-    eq: String
-    ne: String
-    gt: String
-    gte: String
-    lt: String
-    lte: String
-    in: [String]
-    nin: [String]
-    between: [String]
-  }
+  # input NumberQueryOperatorInput {
+  #   eq: String
+  #   ne: String
+  #   gt: String
+  #   gte: String
+  #   lt: String
+  #   lte: String
+  #   in: [String]
+  #   nin: [String]
+  #   between: [String]
+  # }
 
-  input StringQueryOperatorInput {
-    eq: String
-    ne: String
-    in: [String]
-    nin: [String]
-    regex: String
-  }
+  # input StringQueryOperatorInput {
+  #   eq: String
+  #   ne: String
+  #   in: [String]
+  #   nin: [String]
+  #   regex: String
+  # }
 
-  input ArrayOperatorInput {
-    contains: [String]
-  }
+  # input ArrayOperatorInput {
+  #   contains: [String]
+  # }
 
-  input StoreFilterInput {
-    id: ID
+  # input StoreFilterInput {
+  #   id: ID
+  # }
+
+  enum StoreStatus {
+    ACTIVE
+    INACTIVE
   }
 
   type Store {
@@ -58,6 +58,8 @@ exports.typeDefs = (0, apollo_server_express_1.gql) `
     products: [Product]!
     owner: User!
     status: StoreStatus!
+    limit_product: Int
+    document_verification: Media
   }
 
   type Query {

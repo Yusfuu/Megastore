@@ -6,7 +6,6 @@ var Role;
     Role["USER"] = "USER";
     Role["SELLER"] = "SELLER";
     Role["ADMIN"] = "ADMIN";
-    Role["SUPER_ADMIN"] = "SUPER_ADMIN";
 })(Role = exports.Role || (exports.Role = {}));
 var StoreStatus;
 (function (StoreStatus) {
@@ -46,6 +45,6 @@ var TypeAccount;
     TypeAccount["BASIC"] = "BASIC";
     TypeAccount["STARTER"] = "STARTER";
     TypeAccount["PRO"] = "PRO";
-    TypeAccount["EXPERT"] = "Expert";
+    TypeAccount["EXPERT"] = "EXPERT";
 })(TypeAccount = exports.TypeAccount || (exports.TypeAccount = {}));
 //# sourceMappingURL=enums.js.map

@@ -3,7 +3,6 @@ import { multiFileUpload } from '@lib/upload';
 import {
   IProduct,
   Product,
-  // IBrand,
   ICategory,
   IStore,
   Store,
@@ -23,6 +22,12 @@ export const resolvers: Resolvers = {
   },
   Mutation: {
     createProduct: async (_, { input }, { user }) => {
+      const store = await Store.findOne({ id: user.store });
+
+      if (store?.limit_product === 0) {
+        throw new Error('Store limit product is 0');
+      }
+
       // create product in Product model
       const images = await multiFileUpload(input.thumbnails as IFile[]);
 
@@ -30,9 +35,10 @@ export const resolvers: Resolvers = {
         ...input,
         thumbnails: images,
       });
-
       // update product array in Store model
       // and decrease product limit by 1
+
+      // check if produc limit is not exceeded
       await Store.updateOne(
         { _id: user.store },
         { $addToSet: { products: product.id }, $inc: { productLimit: -1 } }
@@ -42,7 +48,11 @@ export const resolvers: Resolvers = {
     },
     deleteProduct: async (_, { id }, { user }) => {
       // delete product in Product model
-      const product = await Product.findByIdAndDelete(id);
+      const product: IProduct | null = await Product.findByIdAndDelete(id);
+
+      if (!product) {
+        throw new Error('Product not found');
+      }
 
       // update product array in Store model
       await Store.updateOne(
@@ -62,10 +72,6 @@ export const resolvers: Resolvers = {
     },
   },
   Product: {
-    // brand: async ({ brand: id }, args, { dataloader }) => {
-    //   const brand: IBrand | null = await dataloader.brand.load(id);
-    //   return brand;
-    // },
     category: async ({ category: ids }, args, { dataloader }) => {
       const categories: ICategory[] = await dataloader.category.loadMany(ids);
       return categories;

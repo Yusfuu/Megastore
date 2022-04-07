@@ -1,8 +1,8 @@
-import type { Resolvers } from "@generated/types";
-import { generateJWT } from "@lib/jwt";
-import { User, IUser, IStore } from "@models/index";
-import { AuthenticationError } from "apollo-server-core";
-import { hash, compare } from "bcrypt";
+import type { Resolvers } from '@generated/types';
+import { generateJWT } from '@lib/jwt';
+import { User, IUser, IStore } from '@models/index';
+import { AuthenticationError } from 'apollo-server-core';
+import { hash, compare } from 'bcrypt';
 
 export const resolvers: Resolvers = {
   Mutation: {
@@ -21,11 +21,11 @@ export const resolvers: Resolvers = {
       }).catch((err: any) => (err.code === 11000 ? null : undefined));
 
       if (user === undefined) {
-        throw new AuthenticationError("something went wrong");
+        throw new AuthenticationError('something went wrong');
       }
 
       if (user === null) {
-        throw new AuthenticationError("account already exists");
+        throw new AuthenticationError('account already exists');
       }
 
       // generate token
@@ -50,14 +50,14 @@ export const resolvers: Resolvers = {
 
       // check if user exists
       if (!user) {
-        throw new AuthenticationError("Sorry, we could not find your account.");
+        throw new AuthenticationError('Sorry, we could not find your account.');
       }
 
       // check if password is correct
       const isValid = await compare(password, user.password);
 
       if (!isValid) {
-        throw new AuthenticationError("Wrong password!");
+        throw new AuthenticationError('Wrong password!');
       }
 
       // generate token
@@ -78,14 +78,14 @@ export const resolvers: Resolvers = {
       const currentUser = await User.findOne({ id: user.id });
 
       if (!currentUser) {
-        throw new AuthenticationError("Sorry, we could not find your account.");
+        throw new AuthenticationError('Sorry, we could not find your account.');
       }
 
       // compare old password
       const isValid = await compare(oldPassword, currentUser.password);
 
       if (!isValid) {
-        throw new AuthenticationError("Wrong password!");
+        throw new AuthenticationError('Wrong password!');
       }
 
       // hash new password
@@ -103,12 +103,12 @@ export const resolvers: Resolvers = {
   },
   AuthResult: {
     __resolveType(obj: any) {
-      return obj.token ? "AuthPayload" : "User";
+      return obj.token ? 'AuthPayload' : 'User';
     },
   },
 
   User: {
-    Store: async ({ Store: id, isSeller }, _, { dataloader }) => {
+    store: async ({ store: id, isSeller }, _, { dataloader }) => {
       if (!isSeller) return null;
       const store = await dataloader.store.load(id);
       return store;

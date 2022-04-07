@@ -30,6 +30,7 @@ exports.typeDefs = (0, apollo_server_express_1.gql) `
 
   type Query {
     getAll: [Super!]
+    getUsersAccount(role: Role, isSeller: Boolean): [User]!
   }
 
   type Mutation {

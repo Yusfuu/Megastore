@@ -11,6 +11,15 @@ export const resolvers: Resolvers = {
       const superAdmins: ISuper[] = await Super.find({});
       return superAdmins;
     },
+    getUsersAccount: async (_, { role, isSeller }) => {
+      const filter = {
+        ...(role && { role }),
+        ...(isSeller && { isSeller }),
+      };
+
+      const users: IUser[] = await User.find(filter);
+      return users;
+    },
   },
   Mutation: {
     addSuper: async (_, { input }) => {

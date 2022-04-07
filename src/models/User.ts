@@ -11,9 +11,9 @@ export interface IUser {
   password: string;
   role: Role;
   store: IStore;
-  AccountStatus: AccountStatus;
+  accountStatus: AccountStatus;
   isSeller: boolean;
-  typeAccount: TypeAccount | null;
+  typeAccount: TypeAccount;
 }
 
 // 2. Create a Schema corresponding to the document interface.
@@ -29,7 +29,7 @@ const schema = new Schema<IUser>(
       enum: Role,
       default: Role.USER,
     },
-    AccountStatus: {
+    accountStatus: {
       type: String,
       required: true,
       enum: AccountStatus,

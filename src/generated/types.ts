@@ -2,6 +2,7 @@ import { Role } from '../ts/enums';
 import { StoreStatus } from '../ts/enums';
 import { Sort } from '../ts/enums';
 import { AccountStatus } from '../ts/enums';
+import { TypeAccount } from '../ts/enums';
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 import { Context } from '../config/context';
 export type Maybe<T> = T | null;
@@ -45,10 +46,6 @@ export type AdminInput = {
   email: Scalars['String'];
   name: Scalars['String'];
   password: Scalars['String'];
-};
-
-export type ArrayOperatorInput = {
-  contains?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type AuthPayload = {
@@ -258,18 +255,6 @@ export type Node = {
   id: Scalars['ID'];
 };
 
-export type NumberQueryOperatorInput = {
-  between?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  eq?: InputMaybe<Scalars['String']>;
-  gt?: InputMaybe<Scalars['String']>;
-  gte?: InputMaybe<Scalars['String']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  lt?: InputMaybe<Scalars['String']>;
-  lte?: InputMaybe<Scalars['String']>;
-  ne?: InputMaybe<Scalars['String']>;
-  nin?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-};
-
 export type PageInfo = {
   __typename?: 'PageInfo';
   hasNextPage: Scalars['Boolean'];
@@ -313,6 +298,7 @@ export type Query = {
   categories: Array<Maybe<Category>>;
   getAll?: Maybe<Array<Super>>;
   getCustomers: Array<Maybe<Customer>>;
+  getUsersAccount: Array<Maybe<User>>;
   product?: Maybe<Product>;
   products?: Maybe<Array<Maybe<Product>>>;
   store?: Maybe<Store>;
@@ -322,6 +308,12 @@ export type Query = {
 
 export type QueryBrandArgs = {
   id: Scalars['ID'];
+};
+
+
+export type QueryGetUsersAccountArgs = {
+  isSeller?: InputMaybe<Scalars['Boolean']>;
+  role?: InputMaybe<Role>;
 };
 
 
@@ -346,7 +338,9 @@ export { Sort };
 
 export type Store = {
   __typename?: 'Store';
+  document_verification?: Maybe<Media>;
   id: Scalars['ID'];
+  limit_product?: Maybe<Scalars['Int']>;
   name: Scalars['String'];
   owner: User;
   products: Array<Maybe<Product>>;
@@ -354,19 +348,7 @@ export type Store = {
   thumbnail: Array<Maybe<Media>>;
 };
 
-export type StoreFilterInput = {
-  id?: InputMaybe<Scalars['ID']>;
-};
-
 export { StoreStatus };
-
-export type StringQueryOperatorInput = {
-  eq?: InputMaybe<Scalars['String']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  ne?: InputMaybe<Scalars['String']>;
-  nin?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  regex?: InputMaybe<Scalars['String']>;
-};
 
 export type Super = {
   __typename?: 'Super';
@@ -381,24 +363,19 @@ export type SuperInput = {
   password: Scalars['String'];
 };
 
-export enum TypeAccountEnum {
-  Basic = 'BASIC',
-  Expert = 'EXPERT',
-  Pro = 'PRO',
-  Starter = 'STARTER'
-}
+export { TypeAccount };
 
 export type User = {
   __typename?: 'User';
-  AccountStatus: AccountStatus;
-  Store?: Maybe<Store>;
+  accountStatus?: Maybe<AccountStatus>;
   email: Scalars['String'];
   firstName: Scalars['String'];
   id: Scalars['ID'];
   isSeller: Scalars['Boolean'];
   lastName: Scalars['String'];
   role: Role;
-  typeAccount?: Maybe<TypeAccountEnum>;
+  store?: Maybe<Store>;
+  typeAccount?: Maybe<TypeAccount>;
 };
 
 export type UserInput = {
@@ -503,7 +480,6 @@ export type ResolversTypes = {
   Address: ResolverTypeWrapper<Address>;
   Admin: ResolverTypeWrapper<Admin>;
   AdminInput: AdminInput;
-  ArrayOperatorInput: ArrayOperatorInput;
   AuthPayload: ResolverTypeWrapper<AuthPayload>;
   AuthResult: ResolversTypes['AuthPayload'] | ResolversTypes['User'];
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
@@ -519,7 +495,6 @@ export type ResolversTypes = {
   Media: ResolverTypeWrapper<Media>;
   Mutation: ResolverTypeWrapper<{}>;
   Node: never;
-  NumberQueryOperatorInput: NumberQueryOperatorInput;
   PageInfo: ResolverTypeWrapper<PageInfo>;
   PaginateEntity: never;
   Product: ResolverTypeWrapper<Product>;
@@ -528,13 +503,11 @@ export type ResolversTypes = {
   Role: Role;
   Sort: Sort;
   Store: ResolverTypeWrapper<Store>;
-  StoreFilterInput: StoreFilterInput;
   StoreStatus: StoreStatus;
   String: ResolverTypeWrapper<Scalars['String']>;
-  StringQueryOperatorInput: StringQueryOperatorInput;
   Super: ResolverTypeWrapper<Super>;
   SuperInput: SuperInput;
-  TypeAccountEnum: TypeAccountEnum;
+  TypeAccount: TypeAccount;
   Upload: ResolverTypeWrapper<Scalars['Upload']>;
   User: ResolverTypeWrapper<User>;
   UserInput: UserInput;
@@ -549,7 +522,6 @@ export type ResolversParentTypes = {
   Address: Address;
   Admin: Admin;
   AdminInput: AdminInput;
-  ArrayOperatorInput: ArrayOperatorInput;
   AuthPayload: AuthPayload;
   AuthResult: ResolversParentTypes['AuthPayload'] | ResolversParentTypes['User'];
   Boolean: Scalars['Boolean'];
@@ -564,16 +536,13 @@ export type ResolversParentTypes = {
   Media: Media;
   Mutation: {};
   Node: never;
-  NumberQueryOperatorInput: NumberQueryOperatorInput;
   PageInfo: PageInfo;
   PaginateEntity: never;
   Product: Product;
   ProductInput: ProductInput;
   Query: {};
   Store: Store;
-  StoreFilterInput: StoreFilterInput;
   String: Scalars['String'];
-  StringQueryOperatorInput: StringQueryOperatorInput;
   Super: Super;
   SuperInput: SuperInput;
   Upload: Scalars['Upload'];
@@ -737,6 +706,7 @@ export type QueryResolvers<ContextType = Context, ParentType extends ResolversPa
   categories?: Resolver<Array<Maybe<ResolversTypes['Category']>>, ParentType, ContextType>;
   getAll?: Resolver<Maybe<Array<ResolversTypes['Super']>>, ParentType, ContextType>;
   getCustomers?: Resolver<Array<Maybe<ResolversTypes['Customer']>>, ParentType, ContextType>;
+  getUsersAccount?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType, Partial<QueryGetUsersAccountArgs>>;
   product?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<QueryProductArgs, 'id'>>;
   products?: Resolver<Maybe<Array<Maybe<ResolversTypes['Product']>>>, ParentType, ContextType>;
   store?: Resolver<Maybe<ResolversTypes['Store']>, ParentType, ContextType, RequireFields<QueryStoreArgs, 'id'>>;
@@ -748,7 +718,9 @@ export type RoleResolvers = EnumResolverSignature<{ ADMIN?: any, SELLER?: any, U
 export type SortResolvers = EnumResolverSignature<{ ascending?: any, descending?: any }, ResolversTypes['Sort']>;
 
 export type StoreResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Store'] = ResolversParentTypes['Store']> = {
+  document_verification?: Resolver<Maybe<ResolversTypes['Media']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  limit_product?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   owner?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   products?: Resolver<Array<Maybe<ResolversTypes['Product']>>, ParentType, ContextType>;
@@ -766,20 +738,22 @@ export type SuperResolvers<ContextType = Context, ParentType extends ResolversPa
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type TypeAccountResolvers = EnumResolverSignature<{ BASIC?: any, EXPERT?: any, PRO?: any, STARTER?: any }, ResolversTypes['TypeAccount']>;
+
 export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Upload'], any> {
   name: 'Upload';
 }
 
 export type UserResolvers<ContextType = Context, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
-  AccountStatus?: Resolver<ResolversTypes['AccountStatus'], ParentType, ContextType>;
-  Store?: Resolver<Maybe<ResolversTypes['Store']>, ParentType, ContextType>;
+  accountStatus?: Resolver<Maybe<ResolversTypes['AccountStatus']>, ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   firstName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   isSeller?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   lastName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   role?: Resolver<ResolversTypes['Role'], ParentType, ContextType>;
-  typeAccount?: Resolver<Maybe<ResolversTypes['TypeAccountEnum']>, ParentType, ContextType>;
+  store?: Resolver<Maybe<ResolversTypes['Store']>, ParentType, ContextType>;
+  typeAccount?: Resolver<Maybe<ResolversTypes['TypeAccount']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -811,6 +785,7 @@ export type Resolvers<ContextType = Context> = {
   Store?: StoreResolvers<ContextType>;
   StoreStatus?: StoreStatusResolvers;
   Super?: SuperResolvers<ContextType>;
+  TypeAccount?: TypeAccountResolvers;
   Upload?: GraphQLScalarType;
   User?: UserResolvers<ContextType>;
   responseSub?: ResponseSubResolvers<ContextType>;

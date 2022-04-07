@@ -28,6 +28,7 @@ export const typeDefs = gql`
 
   type Query {
     getAll: [Super!]
+    getUsersAccount(role: Role, isSeller: Boolean): [User]!
   }
 
   type Mutation {
