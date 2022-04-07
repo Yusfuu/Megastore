@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { IProduct, IUser } from '@models/index';
-import { ProductLimit, StoreStatus } from '@ts/enums';
+import { StoreStatus } from '@ts/enums';
 import { IMedia } from './Media';
 
 // 1. Create an interface representing a document in MongoDB.
@@ -12,7 +12,7 @@ export interface IStore {
   owner: IUser;
   status: StoreStatus;
   document_verification: IMedia;
-  limit_product: ProductLimit.STARTER | null;
+  limit_product: number;
 }
 
 export interface PaginatedStore {
@@ -42,8 +42,7 @@ const schema = new Schema<IStore>(
     },
     limit_product: {
       type: Number,
-      enum: ProductLimit,
-      default: ProductLimit.STARTER,
+      default: 0,
     },
   },
   { timestamps: true }

@@ -19,6 +19,7 @@ export const resolvers: Resolvers = {
     },
     store: async (_, { id }) => {
       const store: IStore | null = await Store.findById(id);
+
       return store;
     },
   },

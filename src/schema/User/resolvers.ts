@@ -108,7 +108,7 @@ export const resolvers: Resolvers = {
   },
 
   User: {
-    Store: async ({ Store: id, isSeller }, _, { dataloader }) => {
+    store: async ({ store: id, isSeller }, _, { dataloader }) => {
       if (!isSeller) return null;
       const store = await dataloader.store.load(id);
       return store;

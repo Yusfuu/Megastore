@@ -9,6 +9,7 @@ generates:
         StoreStatus: ../ts/enums#StoreStatus
         Sort: ../ts/enums#Sort
         AccountStatus: ../ts/enums#AccountStatus
+        TypeAccount: ../ts/enums#TypeAccount
     plugins:
       - 'typescript'
       - 'typescript-resolvers'

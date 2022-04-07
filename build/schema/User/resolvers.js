@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.resolvers = void 0;
-const jwt_1 = require("@lib/jwt");
-const index_1 = require("@models/index");
+const jwt_1 = require("../../lib/jwt");
+const index_1 = require("../../models/index");
 const apollo_server_core_1 = require("apollo-server-core");
 const bcrypt_1 = require("bcrypt");
 exports.resolvers = {
@@ -84,7 +84,7 @@ exports.resolvers = {
         },
     },
     User: {
-        Store: async ({ Store: id, isSeller }, _, { dataloader }) => {
+        store: async ({ store: id, isSeller }, _, { dataloader }) => {
             if (!isSeller)
                 return null;
             const store = await dataloader.store.load(id);

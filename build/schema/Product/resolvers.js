@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.resolvers = void 0;
-const upload_1 = require("@lib/upload");
-const index_1 = require("@models/index");
+const upload_1 = require("../../lib/upload");
+const index_1 = require("../../models/index");
 exports.resolvers = {
     Query: {
         products: async (parent, args) => {
@@ -40,10 +40,6 @@ exports.resolvers = {
         },
     },
     Product: {
-        brand: async ({ brand: id }, args, { dataloader }) => {
-            const brand = await dataloader.brand.load(id);
-            return brand;
-        },
         category: async ({ category: ids }, args, { dataloader }) => {
             const categories = await dataloader.category.loadMany(ids);
             return categories;
