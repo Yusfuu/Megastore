@@ -16,6 +16,10 @@ exports.resolvers = {
     },
     Mutation: {
         createProduct: async (_, { input }, { user }) => {
+            const store = await index_1.Store.findOne({ id: user.store });
+            if (store?.limit_product === 0) {
+                throw new Error('Store limit product is 0');
+            }
             // create product in Product model
             const images = await (0, upload_1.multiFileUpload)(input.thumbnails);
             const product = await index_1.Product.create({
@@ -24,12 +28,16 @@ exports.resolvers = {
             });
             // update product array in Store model
             // and decrease product limit by 1
+            // check if produc limit is not exceeded
             await index_1.Store.updateOne({ _id: user.store }, { $addToSet: { products: product.id }, $inc: { productLimit: -1 } });
             return product;
         },
         deleteProduct: async (_, { id }, { user }) => {
             // delete product in Product model
             const product = await index_1.Product.findByIdAndDelete(id);
+            if (!product) {
+                throw new Error('Product not found');
+            }
             // update product array in Store model
             await index_1.Store.updateOne({ _id: user.store }, { $unset: { products: product?.id }, $inc: { productLimit: 1 } });
             return product;

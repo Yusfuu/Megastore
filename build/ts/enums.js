@@ -6,7 +6,6 @@ var Role;
     Role["USER"] = "USER";
     Role["SELLER"] = "SELLER";
     Role["ADMIN"] = "ADMIN";
-    Role["SUPER_ADMIN"] = "SUPER_ADMIN";
 })(Role = exports.Role || (exports.Role = {}));
 var StoreStatus;
 (function (StoreStatus) {
