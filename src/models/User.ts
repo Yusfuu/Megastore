@@ -11,7 +11,7 @@ export interface IUser {
   password: string;
   role: Role;
   store: IStore;
-  accountStatus: AccountStatus;
+  AccountStatus: AccountStatus;
   isSeller: boolean;
   typeAccount: TypeAccount | null;
 }
@@ -29,7 +29,7 @@ const schema = new Schema<IUser>(
       enum: Role,
       default: Role.USER,
     },
-    accountStatus: {
+    AccountStatus: {
       type: String,
       required: true,
       enum: AccountStatus,
