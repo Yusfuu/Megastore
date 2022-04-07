@@ -44,3 +44,9 @@ export enum TypeAccount {
   PRO = 'PRO',
   EXPERT = 'Expert',
 }
+
+export enum ProductLimit {
+  STARTER = 10,
+  PRO = 50,
+  EXPERT = -1,
+}

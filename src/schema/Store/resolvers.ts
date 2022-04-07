@@ -29,12 +29,8 @@ export const resolvers: Resolvers = {
       { user }
     ) => {
       // update user role if user create store
-      if (user.role === "USER") {
-        const updatedUser: IUser | null = await User.findOneAndUpdate(
-          { _id: user.id },
-          { role: "SELLER" },
-          { new: true }
-        );
+      if (user.role === 'USER') {
+        await User.updateOne({ id: user.id }, { role: 'SELLER' });
       }
 
       const promises = [

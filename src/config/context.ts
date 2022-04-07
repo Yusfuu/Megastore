@@ -10,7 +10,6 @@ export interface Context {
   pubsub: RedisPubSub;
   dataloader: typeof dataloader;
   user: IUser;
-  uid: string;
 }
 
 export const context = async ({ req }: { req: Request }): Promise<Context> => {

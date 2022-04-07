@@ -296,14 +296,14 @@ export type Product = {
 };
 
 export type ProductInput = {
-  brand: Scalars['ID'];
-  category: Array<InputMaybe<Scalars['ID']>>;
-  description: Scalars['String'];
-  discount: Scalars['Float'];
-  name: Scalars['String'];
-  price: Scalars['Float'];
-  store: Scalars['ID'];
-  thumbnails: Array<InputMaybe<Scalars['Upload']>>;
+  brand?: InputMaybe<Scalars['ID']>;
+  category?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  description?: InputMaybe<Scalars['String']>;
+  discount?: InputMaybe<Scalars['Float']>;
+  name?: InputMaybe<Scalars['String']>;
+  price?: InputMaybe<Scalars['Float']>;
+  store?: InputMaybe<Scalars['ID']>;
+  thumbnails?: InputMaybe<Array<InputMaybe<Scalars['Upload']>>>;
 };
 
 export type Query = {
