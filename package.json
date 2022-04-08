@@ -41,7 +41,6 @@
     "helmet": "^5.0.2",
     "ioredis": "^4.28.5",
     "jsonwebtoken": "^8.5.1",
-    "mitt": "^3.0.0",
     "mongoose": "^6.2.9",
     "pm2": "^5.2.0",
     "stripe": "^8.215.0",
