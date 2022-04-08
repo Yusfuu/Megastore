@@ -3,7 +3,6 @@ import { multiFileUpload } from '@lib/upload';
 import {
   IProduct,
   Product,
-  IBrand,
   ICategory,
   IStore,
   Store,

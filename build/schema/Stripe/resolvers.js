@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.resolvers = void 0;
-const stripe_1 = require("../../lib/stripe");
-const stripe_service_1 = require("../../services/stripe.service");
+const stripe_1 = require("@lib/stripe");
+const stripe_service_1 = require("@services/stripe.service");
 exports.resolvers = {
     Query: {
         getCustomers: async (_, {}) => {

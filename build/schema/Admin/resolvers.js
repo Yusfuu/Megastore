@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.resolvers = void 0;
-const Store_1 = require("../../models/Store");
+const Store_1 = require("@models/Store");
 // Provide resolver functions for your schema fields
 exports.resolvers = {
     Mutation: {

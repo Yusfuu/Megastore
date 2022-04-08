@@ -10,6 +10,7 @@ exports.typeDefs = (0, apollo_server_express_1.gql) `
     price: Float
     discount: Float
     thumbnails: [Upload]
+    store: ID
     brand: String
     category: [ID]
   }

@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.resolvers = void 0;
-const jwt_1 = require("../../lib/jwt");
-const index_1 = require("../../models/index");
+const jwt_1 = require("@lib/jwt");
+const index_1 = require("@models/index");
 const apollo_server_core_1 = require("apollo-server-core");
 const bcrypt_1 = require("bcrypt");
 exports.resolvers = {

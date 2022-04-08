@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.resolvers = void 0;
-const upload_1 = require("../../lib/upload");
-const index_1 = require("../../models/index");
-const enums_1 = require("../../ts/enums");
+const upload_1 = require("@lib/upload");
+const index_1 = require("@models/index");
+const enums_1 = require("@ts/enums");
 const bcrypt_1 = require("bcrypt");
 exports.resolvers = {
     Query: {
