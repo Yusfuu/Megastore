@@ -183,7 +183,7 @@ export type MutationCreateProductArgs = {
 
 
 export type MutationCreateStoreArgs = {
-  document_verification?: InputMaybe<Scalars['Upload']>;
+  document_verification: Array<InputMaybe<Scalars['Upload']>>;
   name: Scalars['String'];
   thumbnail: Array<InputMaybe<Scalars['Upload']>>;
 };
@@ -668,7 +668,7 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
   createBrand?: Resolver<ResolversTypes['Brand'], ParentType, ContextType, RequireFields<MutationCreateBrandArgs, 'name' | 'thumbnail'>>;
   createCategory?: Resolver<ResolversTypes['Category'], ParentType, ContextType, RequireFields<MutationCreateCategoryArgs, 'name'>>;
   createProduct?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<MutationCreateProductArgs, 'input'>>;
-  createStore?: Resolver<ResolversTypes['Store'], ParentType, ContextType, RequireFields<MutationCreateStoreArgs, 'name' | 'thumbnail'>>;
+  createStore?: Resolver<ResolversTypes['Store'], ParentType, ContextType, RequireFields<MutationCreateStoreArgs, 'document_verification' | 'name' | 'thumbnail'>>;
   deleteAdminAccount?: Resolver<Maybe<ResolversTypes['Admin']>, ParentType, ContextType, RequireFields<MutationDeleteAdminAccountArgs, 'id'>>;
   deleteBrand?: Resolver<Maybe<ResolversTypes['Brand']>, ParentType, ContextType, RequireFields<MutationDeleteBrandArgs, 'id'>>;
   deleteCategory?: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType, RequireFields<MutationDeleteCategoryArgs, 'id'>>;
