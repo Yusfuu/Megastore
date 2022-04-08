@@ -37,11 +37,6 @@ export const resolvers: Resolvers = {
 
       return superAdmin;
     },
-    addImage: async (_, { input }) => {
-      const { files } = input!;
-      let images = await multiFileUpload(files as IFile[]);
-      return images;
-    },
     confirmUserIsSeller: async (_, { id }) => {
       const user: IUser | null = await User.findByIdAndUpdate(
         id,
@@ -53,6 +48,10 @@ export const resolvers: Resolvers = {
         },
         { new: true }
       );
+      return user;
+    },
+    deleteUserAccount: async (_, { id }) => {
+      const user: IUser | null = await User.findByIdAndDelete(id);
       return user;
     },
     updateUserAccountStatus: async (_, { id, status }) => {

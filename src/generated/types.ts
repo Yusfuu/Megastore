@@ -122,7 +122,6 @@ export type Media = {
 export type Mutation = {
   __typename?: 'Mutation';
   addCustomer?: Maybe<Customer>;
-  addImage?: Maybe<Array<Scalars['String']>>;
   addSuper: Super;
   confirmUserIsSeller?: Maybe<User>;
   createAdmin: Admin;
@@ -134,6 +133,7 @@ export type Mutation = {
   deleteCategory?: Maybe<Category>;
   deleteProduct?: Maybe<Product>;
   deleteStore?: Maybe<Store>;
+  deleteUserAccount?: Maybe<User>;
   login?: Maybe<AuthPayload>;
   register?: Maybe<AuthPayload>;
   subscribeToSub?: Maybe<ResponseSub>;
@@ -146,11 +146,6 @@ export type Mutation = {
 
 export type MutationAddCustomerArgs = {
   input?: InputMaybe<InputCustomer>;
-};
-
-
-export type MutationAddImageArgs = {
-  input?: InputMaybe<FileInput>;
 };
 
 
@@ -208,6 +203,11 @@ export type MutationDeleteProductArgs = {
 
 
 export type MutationDeleteStoreArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeleteUserAccountArgs = {
   id: Scalars['ID'];
 };
 
@@ -647,7 +647,6 @@ export type MediaResolvers<ContextType = Context, ParentType extends ResolversPa
 
 export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   addCustomer?: Resolver<Maybe<ResolversTypes['Customer']>, ParentType, ContextType, Partial<MutationAddCustomerArgs>>;
-  addImage?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType, Partial<MutationAddImageArgs>>;
   addSuper?: Resolver<ResolversTypes['Super'], ParentType, ContextType, Partial<MutationAddSuperArgs>>;
   confirmUserIsSeller?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationConfirmUserIsSellerArgs, 'id'>>;
   createAdmin?: Resolver<ResolversTypes['Admin'], ParentType, ContextType, Partial<MutationCreateAdminArgs>>;
@@ -659,6 +658,7 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
   deleteCategory?: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType, RequireFields<MutationDeleteCategoryArgs, 'id'>>;
   deleteProduct?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<MutationDeleteProductArgs, 'id'>>;
   deleteStore?: Resolver<Maybe<ResolversTypes['Store']>, ParentType, ContextType, RequireFields<MutationDeleteStoreArgs, 'id'>>;
+  deleteUserAccount?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationDeleteUserAccountArgs, 'id'>>;
   login?: Resolver<Maybe<ResolversTypes['AuthPayload']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'email' | 'password'>>;
   register?: Resolver<Maybe<ResolversTypes['AuthPayload']>, ParentType, ContextType, Partial<MutationRegisterArgs>>;
   subscribeToSub?: Resolver<Maybe<ResolversTypes['responseSub']>, ParentType, ContextType, Partial<MutationSubscribeToSubArgs>>;
