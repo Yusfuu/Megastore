@@ -19,6 +19,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Date: any;
   Upload: any;
 };
 
@@ -36,10 +37,10 @@ export type Address = {
 
 export type Admin = {
   __typename?: 'Admin';
+  createdAt: Scalars['Date'];
   email: Scalars['String'];
   id: Scalars['ID'];
   name: Scalars['String'];
-  password: Scalars['String'];
 };
 
 export type AdminInput = {
@@ -129,6 +130,7 @@ export type Mutation = {
   createCategory: Category;
   createProduct: Product;
   createStore: Store;
+  deleteAdminAccount?: Maybe<Admin>;
   deleteBrand?: Maybe<Brand>;
   deleteCategory?: Maybe<Category>;
   deleteProduct?: Maybe<Product>;
@@ -184,6 +186,11 @@ export type MutationCreateStoreArgs = {
   document_verification?: InputMaybe<Scalars['Upload']>;
   name: Scalars['String'];
   thumbnail: Array<InputMaybe<Scalars['Upload']>>;
+};
+
+
+export type MutationDeleteAdminAccountArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -296,6 +303,7 @@ export type Query = {
   brand?: Maybe<Brand>;
   brands: Array<Maybe<Brand>>;
   categories: Array<Maybe<Category>>;
+  getAdminsAccount?: Maybe<Array<Admin>>;
   getAll?: Maybe<Array<Super>>;
   getCustomers: Array<Maybe<Customer>>;
   getUsersAccount: Array<Maybe<User>>;
@@ -487,6 +495,7 @@ export type ResolversTypes = {
   CacheControlScope: CacheControlScope;
   Category: ResolverTypeWrapper<Category>;
   Customer: ResolverTypeWrapper<Customer>;
+  Date: ResolverTypeWrapper<Scalars['Date']>;
   FileInput: FileInput;
   Float: ResolverTypeWrapper<Scalars['Float']>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
@@ -528,6 +537,7 @@ export type ResolversParentTypes = {
   Brand: Brand;
   Category: Category;
   Customer: Customer;
+  Date: Scalars['Date'];
   FileInput: FileInput;
   Float: Scalars['Float'];
   ID: Scalars['ID'];
@@ -575,10 +585,10 @@ export type AddressResolvers<ContextType = Context, ParentType extends Resolvers
 };
 
 export type AdminResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Admin'] = ResolversParentTypes['Admin']> = {
+  createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -631,6 +641,10 @@ export type CustomerResolvers<ContextType = Context, ParentType extends Resolver
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Date'], any> {
+  name: 'Date';
+}
+
 export type InvoiceSettingsResolvers<ContextType = Context, ParentType extends ResolversParentTypes['InvoiceSettings'] = ResolversParentTypes['InvoiceSettings']> = {
   custom_fields?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   default_payment_method?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -655,6 +669,7 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
   createCategory?: Resolver<ResolversTypes['Category'], ParentType, ContextType, RequireFields<MutationCreateCategoryArgs, 'name'>>;
   createProduct?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<MutationCreateProductArgs, 'input'>>;
   createStore?: Resolver<ResolversTypes['Store'], ParentType, ContextType, RequireFields<MutationCreateStoreArgs, 'name' | 'thumbnail'>>;
+  deleteAdminAccount?: Resolver<Maybe<ResolversTypes['Admin']>, ParentType, ContextType, RequireFields<MutationDeleteAdminAccountArgs, 'id'>>;
   deleteBrand?: Resolver<Maybe<ResolversTypes['Brand']>, ParentType, ContextType, RequireFields<MutationDeleteBrandArgs, 'id'>>;
   deleteCategory?: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType, RequireFields<MutationDeleteCategoryArgs, 'id'>>;
   deleteProduct?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<MutationDeleteProductArgs, 'id'>>;
@@ -704,6 +719,7 @@ export type QueryResolvers<ContextType = Context, ParentType extends ResolversPa
   brand?: Resolver<Maybe<ResolversTypes['Brand']>, ParentType, ContextType, RequireFields<QueryBrandArgs, 'id'>>;
   brands?: Resolver<Array<Maybe<ResolversTypes['Brand']>>, ParentType, ContextType>;
   categories?: Resolver<Array<Maybe<ResolversTypes['Category']>>, ParentType, ContextType>;
+  getAdminsAccount?: Resolver<Maybe<Array<ResolversTypes['Admin']>>, ParentType, ContextType>;
   getAll?: Resolver<Maybe<Array<ResolversTypes['Super']>>, ParentType, ContextType>;
   getCustomers?: Resolver<Array<Maybe<ResolversTypes['Customer']>>, ParentType, ContextType>;
   getUsersAccount?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType, Partial<QueryGetUsersAccountArgs>>;
@@ -772,6 +788,7 @@ export type Resolvers<ContextType = Context> = {
   Brand?: BrandResolvers<ContextType>;
   Category?: CategoryResolvers<ContextType>;
   Customer?: CustomerResolvers<ContextType>;
+  Date?: GraphQLScalarType;
   InvoiceSettings?: InvoiceSettingsResolvers<ContextType>;
   Media?: MediaResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;

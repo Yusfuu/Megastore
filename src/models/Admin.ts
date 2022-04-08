@@ -6,6 +6,7 @@ export interface IAdmin {
   name: string;
   email: string;
   password: string;
+  createdAt: Date;
 }
 
 // 2. Create a Schema corresponding to the document interface.

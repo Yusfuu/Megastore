@@ -29,6 +29,7 @@ export const typeDefs = gql`
   type Query {
     getAll: [Super!]
     getUsersAccount(role: Role, isSeller: Boolean): [User]!
+    getAdminsAccount: [Admin!]
   }
 
   type Mutation {
@@ -37,5 +38,6 @@ export const typeDefs = gql`
     updateUserAccountStatus(id: ID!, status: AccountStatus!): User
     createAdmin(input: AdminInput): Admin!
     deleteUserAccount(id: ID!): User
+    deleteAdminAccount(id: ID!): Admin
   }
 `;

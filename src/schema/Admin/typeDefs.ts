@@ -11,11 +11,13 @@ export const typeDefs = gql`
   #   filter: StoreFilters
   # }
 
+  scalar Date
+
   type Admin {
     id: ID!
     name: String!
     email: String!
-    password: String!
+    createdAt: Date!
   }
 
   type Mutation {

@@ -9,16 +9,11 @@ const enums_3 = require("../ts/enums");
 Object.defineProperty(exports, "Sort", { enumerable: true, get: function () { return enums_3.Sort; } });
 const enums_4 = require("../ts/enums");
 Object.defineProperty(exports, "AccountStatus", { enumerable: true, get: function () { return enums_4.AccountStatus; } });
+const enums_5 = require("../ts/enums");
+Object.defineProperty(exports, "TypeAccount", { enumerable: true, get: function () { return enums_5.TypeAccount; } });
 var CacheControlScope;
 (function (CacheControlScope) {
     CacheControlScope["Private"] = "PRIVATE";
     CacheControlScope["Public"] = "PUBLIC";
 })(CacheControlScope = exports.CacheControlScope || (exports.CacheControlScope = {}));
-var TypeAccount;
-(function (TypeAccount) {
-    TypeAccount["Basic"] = "BASIC";
-    TypeAccount["Expert"] = "EXPERT";
-    TypeAccount["Pro"] = "PRO";
-    TypeAccount["Starter"] = "STARTER";
-})(TypeAccount = exports.TypeAccount || (exports.TypeAccount = {}));
 //# sourceMappingURL=types.js.map

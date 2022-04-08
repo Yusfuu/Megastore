@@ -1,8 +1,6 @@
 import type { Resolvers } from '@generated/types';
-import { multiFileUpload } from '@lib/upload';
-import { Super, ISuper, User, IUser, Admin } from '@models/index';
+import { Super, ISuper, User, IUser, Admin, IAdmin } from '@models/index';
 import { TypeAccount } from '@ts/enums';
-import { IFile } from '@ts/types';
 import { hash } from 'bcrypt';
 
 export const resolvers: Resolvers = {
@@ -19,6 +17,10 @@ export const resolvers: Resolvers = {
 
       const users: IUser[] = await User.find(filter);
       return users;
+    },
+    getAdminsAccount: async (_, __, {}) => {
+      const admins: IAdmin[] = await Admin.find();
+      return admins;
     },
   },
   Mutation: {
@@ -54,6 +56,10 @@ export const resolvers: Resolvers = {
       const user: IUser | null = await User.findByIdAndDelete(id);
       return user;
     },
+    deleteAdminAccount: async (_, { id }) => {
+      const admin: IAdmin | null = await Admin.findByIdAndDelete(id);
+      return admin;
+    },
     updateUserAccountStatus: async (_, { id, status }) => {
       const user: IUser | null = await User.findByIdAndUpdate(
         id,
@@ -73,7 +79,7 @@ export const resolvers: Resolvers = {
       const passwordHash = await hash(password, 10);
 
       // save user in database
-      const admin: ISuper = await Admin.create({
+      const admin: IAdmin = await Admin.create({
         name,
         email,
         password: passwordHash,

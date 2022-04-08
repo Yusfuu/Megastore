@@ -1,9 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.resolvers = void 0;
-const upload_1 = require("@lib/upload");
-const index_1 = require("@models/index");
-const enums_1 = require("@ts/enums");
+const index_1 = require("../../models/index");
+const enums_1 = require("../../ts/enums");
 const bcrypt_1 = require("bcrypt");
 exports.resolvers = {
     Query: {
@@ -19,6 +18,10 @@ exports.resolvers = {
             const users = await index_1.User.find(filter);
             return users;
         },
+        getAdminsAccount: async (_, __, {}) => {
+            const admins = await index_1.Admin.find();
+            return admins;
+        },
     },
     Mutation: {
         addSuper: async (_, { input }) => {
@@ -33,11 +36,6 @@ exports.resolvers = {
             });
             return superAdmin;
         },
-        addImage: async (_, { input }) => {
-            const { files } = input;
-            let images = await (0, upload_1.multiFileUpload)(files);
-            return images;
-        },
         confirmUserIsSeller: async (_, { id }) => {
             const user = await index_1.User.findByIdAndUpdate(id, {
                 $set: {
@@ -46,6 +44,14 @@ exports.resolvers = {
                 },
             }, { new: true });
             return user;
+        },
+        deleteUserAccount: async (_, { id }) => {
+            const user = await index_1.User.findByIdAndDelete(id);
+            return user;
+        },
+        deleteAdminAccount: async (_, { id }) => {
+            const admin = await index_1.Admin.findByIdAndDelete(id);
+            return admin;
         },
         updateUserAccountStatus: async (_, { id, status }) => {
             const user = await index_1.User.findByIdAndUpdate(id, {
