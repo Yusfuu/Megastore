@@ -16,6 +16,7 @@ export const resolvers: Resolvers = {
       };
 
       const users: IUser[] = await User.find(filter);
+
       return users;
     },
     getAdminsAccount: async (_, __, {}) => {

@@ -46,8 +46,6 @@ export const resolvers: Resolvers = {
       // find user by email
       const user = await User.findOne({ email });
 
-      console.log(user);
-
       // check if user exists
       if (!user) {
         throw new AuthenticationError('Sorry, we could not find your account.');
