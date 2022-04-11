@@ -3,7 +3,7 @@ import { Brand, IBrand } from '@models/index';
 
 export const resolvers: Resolvers = {
   Query: {
-    brands: async (parent, args) => {
+    brands: async () => {
       const brands: IBrand[] = await Brand.find();
       return brands;
     },

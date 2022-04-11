@@ -5,7 +5,7 @@ import { IFile } from '@ts/types';
 
 export const resolvers: Resolvers = {
   Query: {
-    stores: async (parent, args) => {
+    stores: async (_, args) => {
       const status = args.status;
       const sort = args.sort || 'ascending';
 

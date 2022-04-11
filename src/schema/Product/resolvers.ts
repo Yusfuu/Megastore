@@ -1,21 +1,15 @@
 import type { Resolvers } from '@generated/types';
 import { multiFileUpload } from '@lib/upload';
-import {
-  IProduct,
-  Product,
-  ICategory,
-  IStore,
-  Store,
-} from '@models/index';
+import { IProduct, Product, ICategory, IStore, Store } from '@models/index';
 import { IFile } from '@ts/types';
 
 export const resolvers: Resolvers = {
   Query: {
-    products: async (parent, args) => {
+    products: async () => {
       const products: IProduct[] = await Product.find();
       return products;
     },
-    product: async (parent, args) => {
+    product: async (_, args) => {
       const product: IProduct | null = await Product.findById(args.id);
       return product;
     },
@@ -72,15 +66,15 @@ export const resolvers: Resolvers = {
     },
   },
   Product: {
-    category: async ({ category: ids }, args, { dataloader }) => {
+    category: async ({ category: ids }, _, { dataloader }) => {
       const categories: ICategory[] = await dataloader.category.loadMany(ids);
       return categories;
     },
-    store: async ({ store: id }, args, { dataloader }) => {
+    store: async ({ store: id }, _, { dataloader }) => {
       const store: IStore = await dataloader.store.load(id);
       return store;
     },
-    thumbnails: async ({ thumbnails: ids }, args, { dataloader }) => {
+    thumbnails: async ({ thumbnails: ids }, _, { dataloader }) => {
       const images = await dataloader.media.loadMany(ids);
       return images;
     },

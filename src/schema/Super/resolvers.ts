@@ -5,7 +5,7 @@ import { hash } from 'bcrypt';
 
 export const resolvers: Resolvers = {
   Query: {
-    getAll: async (_, __, {}) => {
+    getAll: async () => {
       const superAdmins: ISuper[] = await Super.find({});
       return superAdmins;
     },
@@ -19,7 +19,7 @@ export const resolvers: Resolvers = {
 
       return users;
     },
-    getAdminsAccount: async (_, __, {}) => {
+    getAdminsAccount: async () => {
       const admins: IAdmin[] = await Admin.find();
       return admins;
     },

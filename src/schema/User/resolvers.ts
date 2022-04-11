@@ -1,6 +1,6 @@
 import type { Resolvers } from '@generated/types';
 import { generateJWT } from '@lib/jwt';
-import { User, IUser, IStore } from '@models/index';
+import { User, IUser } from '@models/index';
 import { AuthenticationError } from 'apollo-server-core';
 import { hash, compare } from 'bcrypt';
 
