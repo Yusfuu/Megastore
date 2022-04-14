@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="530.292" height="200.157" viewBox="0 0 530.292 200.157">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.182" y1="0.374" x2="1.306" y2="0.501" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#d50d0d"/>
+      <stop offset="1" stop-color="#6b0707"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_267" data-name="Group 267" transform="translate(-430.708 -6041.843)">
+    <rect id="Rectangle_349" data-name="Rectangle 349" width="467" height="118" rx="31" transform="translate(494 6124)" fill="#47cede"/>
+    <g id="Group_266" data-name="Group 266" transform="matrix(0.848, -0.53, 0.53, 0.848, -2619.704, 1305.116)">
+      <path id="Path_65" data-name="Path 65" d="M0,0H85l16.523,96H-14.63Z" transform="translate(69 5692)" fill="url(#linear-gradient)"/>
+      <line id="Line_1" data-name="Line 1" x1="25" y2="56" transform="translate(44.5 5692.5)" fill="none" stroke="#1cb736" stroke-width="1"/>
+      <line id="Line_2" data-name="Line 2" x1="29" y2="50" transform="translate(40.5 5692.5)" fill="none" stroke="#1cb736" stroke-width="1"/>
+      <line id="Line_3" data-name="Line 3" x1="29" y2="55" transform="translate(40.5 5692.5)" fill="none" stroke="#1cb736" stroke-width="1"/>
+    </g>
+    <text id="Promotion" transform="translate(561 6206)" fill="#fff" font-size="63" font-family="SegoeUIBlack, Segoe UI"><tspan x="0" y="0">Promotion</tspan></text>
+  </g>
+</svg>

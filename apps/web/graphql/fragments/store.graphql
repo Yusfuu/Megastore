@@ -1,0 +1,13 @@
+fragment store on Store {
+  id
+  name
+  owner {
+    id
+    email
+  }
+  status
+  thumbnail {
+    alt
+    id
+  }
+}

@@ -1,0 +1,28 @@
+query Products {
+  products {
+    brand {
+      id
+      name
+      thumbnail
+    }
+    category {
+      id
+      name
+    }
+    description
+    discount
+    id
+    name
+    price
+    stock
+    store {
+      ...store
+    }
+    thumbnails {
+      alt
+      id
+      src
+      type
+    }
+  }
+}

@@ -1,0 +1,81 @@
+[
+  {
+    "id": 1,
+    "name": "Premier soins",
+    "parent": "Santé et Beauté",
+    "options": [
+      "Masques",
+      "Vitamines et compléments alimentaires",
+      "Nutrition sportive"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Soin visage",
+    "parent": "Santé et Beauté",
+    "options": ["Crèmes et hydratants", "Nettoyants", "Traitements & Masques"]
+  },
+  {
+    "id": 3,
+    "name": "Soins des cheveux",
+    "parent": "Santé et Beauté",
+    "options": [
+      "Shampoing",
+      "Conditionneur",
+      "Soins & Masques Capillaires",
+      "Appareils & Outils de Coiffure"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Maquillage",
+    "parent": "Santé et Beauté",
+    "options": [
+      "Teint",
+      "Yeux & Sourcils",
+      "Lèvres",
+      "Palettes maquillage",
+      "Ongles",
+      "Pinceaux & Accessoires"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Soins corps",
+    "parent": "Santé et Beauté",
+    "options": ["Hydratants", "Nettoyants", "Gommages & Traitement corporels"]
+  },
+  {
+    "id": 6,
+    "name": "Hommes",
+    "parent": "Santé et Beauté",
+    "options": [
+      "Tondeuses à cheveux nez & Oreilles",
+      "Soins barbe & Moustache",
+      "Crèmes à raser, lotions & Gels"
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Parfum",
+    "parent": "Santé et Beauté",
+    "options": ["Parfums Femme", "Parfums Homme"]
+  },
+  {
+    "id": 8,
+    "name": "Hygiène Bucco Dentaire",
+    "parent": "Santé et Beauté",
+    "options": [
+      "Bain de bouche",
+      "Blanchiment des dents",
+      "Brosses",
+      "Dentifrice"
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Fournitures et équipements médicaux",
+    "parent": "Santé et Beauté",
+    "options": ["Moniteurs de santé"]
+  }
+]

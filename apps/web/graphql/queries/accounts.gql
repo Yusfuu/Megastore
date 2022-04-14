@@ -1,0 +1,10 @@
+query GetUsersAccount($role: Role!, $isSeller: Boolean) {
+  getUsersAccount(role: $role, isSeller: $isSeller) {
+    id
+    firstName
+    lastName
+    role
+    accountStatus
+    isSeller
+  }
+}

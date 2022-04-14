@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "name": "Santé et Beauté",
+    "icon": "spa"
+  },
+  {
+    "id": 2,
+    "name": "Vêtements & Chaussures",
+    "icon": "checkroom"
+  },
+  {
+    "id": 3,
+    "name": "Accessoires Mode",
+    "icon": "diamond"
+  },
+  {
+    "id": 4,
+    "name": "Maison & Cuisine",
+    "icon": "cottage"
+  },
+  {
+    "id": 5,
+    "name": "Téléphone & Tablette",
+    "icon": "camera_alt"
+  },
+  {
+    "id": 6,
+    "name": "Électroménager",
+    "icon": "kitchen"
+  },
+  {
+    "id": 7,
+    "name": "Informatique",
+    "icon": "devices"
+  },
+  {
+    "id": 8,
+    "name": "Supermarché",
+    "icon": "shopping_bag"
+  },
+  {
+    "id": 9,
+    "name": "TV & Hi Tech",
+    "icon": "connected_tv"
+  },
+  {
+    "id": 10,
+    "name": "Accessoires Auto & Moto",
+    "icon": "directions_car"
+  }
+]
