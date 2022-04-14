@@ -4,7 +4,6 @@
 
 > What's inside?
 
-- [Electronjs](https://turborepo.org/docs/features/pipelines)
 - [Apollo Server](https://www.apollographql.com/docs/apollo-server)
 - [Apollo Client](https://www.apollographql.com/docs/react)
 - [Reactjs](https://reactjs.org/)
